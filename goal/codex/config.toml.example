@@ -1,0 +1,17 @@
+# Codex configuration for one task, written to $WORK/<task>/home/.codex/config.toml by goal/setup_home.sh.
+# {placeholders} are filled from goal/codex.env and the task's workspace path; the API key itself stays in the
+# OPENAI_API_KEY environment variable (env_key), never in this file.
+model = "{CODEX_MODEL}"
+model_provider = "endpoint"
+model_reasoning_effort = "medium"
+approval_policy = "never"
+sandbox_mode = "danger-full-access"   # the bubblewrap sandbox around Codex is the boundary
+
+[model_providers.endpoint]
+name = "endpoint"
+base_url = "{OPENAI_BASE_URL}"
+env_key = "OPENAI_API_KEY"
+wire_api = "responses"                # "chat" if the endpoint only speaks Chat Completions
+
+[projects."{WORKSPACE}"]
+trust_level = "trusted"

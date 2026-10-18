@@ -1,0 +1,273 @@
+{
+ "schema": "numerics-trajectory-frozen@2",
+ "spec": {
+  "case": {
+   "steps": 100,
+   "phases": [
+    "gen",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "gen",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "gen",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "gen",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "gen",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "gen",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "gen",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "gen",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "gen",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "gen",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance",
+    "guidance"
+   ],
+   "start_step": 39000,
+   "warmup_step": 20
+  },
+  "note": "compressed schedule: 100 iterations from the published checkpoint's step 39000, learning-rate warmup 20 instead of 500; natural update schedule (a generator update every 10th iteration, a guidance update every iteration); same data, settings and seeds for reference and candidate; deterministic kernels; numerical equivalence only, not quality. last_gen/<key> repeats the latest generator iteration's value on guidance-only iterations, so the endpoint window of 50 iterations averages 5 generator iterations.",
+  "endpoints": [
+   {
+    "name": "fake_score_loss",
+    "loss": "loss_fake_mean",
+    "steps": [
+     50,
+     100
+    ]
+   },
+   {
+    "name": "gan_classifier_loss",
+    "loss": "guidance_cls_loss",
+    "steps": [
+     50,
+     100
+    ]
+   },
+   {
+    "name": "guidance_grad_norm",
+    "loss": "log/guidance_grad_norm",
+    "steps": [
+     50,
+     100
+    ]
+   },
+   {
+    "name": "dmd_loss",
+    "loss": "last_gen/loss_dm",
+    "steps": [
+     50,
+     100
+    ]
+   },
+   {
+    "name": "gan_generator_loss",
+    "loss": "last_gen/gen_cls_loss",
+    "steps": [
+     50,
+     100
+    ]
+   },
+   {
+    "name": "generator_grad_norm",
+    "loss": "last_gen/log/generator_grad_norm",
+    "steps": [
+     50,
+     100
+    ]
+   },
+   {
+    "name": "dmd_gradient_norm",
+    "loss": "last_gen/log/dmtrain_gradient_norm",
+    "steps": [
+     50,
+     100
+    ]
+   }
+  ]
+ },
+ "k": 2.0,
+ "reference_seeds": [
+  10,
+  11,
+  12,
+  13,
+  14,
+  15
+ ],
+ "reference_values": {
+  "10": {
+   "fake_score_loss": 0.16531538985669614,
+   "gan_classifier_loss": 1.028250150680542,
+   "guidance_grad_norm": 0.07347602650523186,
+   "dmd_loss": 0.017241863207891582,
+   "gan_generator_loss": 1.151690885424614,
+   "generator_grad_norm": 0.4187795102596283,
+   "dmd_gradient_norm": 143.48951298477112
+  },
+  "11": {
+   "fake_score_loss": 0.1640981004014611,
+   "gan_classifier_loss": 1.031119741499424,
+   "guidance_grad_norm": 0.07376263752579688,
+   "dmd_loss": 0.019483476877212524,
+   "gan_generator_loss": 1.1531746208667755,
+   "generator_grad_norm": 0.5238167345523834,
+   "dmd_gradient_norm": 147.90407369544528
+  },
+  "12": {
+   "fake_score_loss": 0.16543196335434915,
+   "gan_classifier_loss": 1.0302041268348694,
+   "guidance_grad_norm": 0.07264518186450004,
+   "dmd_loss": 0.01827010461129248,
+   "gan_generator_loss": 1.154474738240242,
+   "generator_grad_norm": 0.46719257831573485,
+   "dmd_gradient_norm": 140.40481017865181
+  },
+  "13": {
+   "fake_score_loss": 0.16242858864367007,
+   "gan_classifier_loss": 1.0404663303494452,
+   "guidance_grad_norm": 0.07249718576669693,
+   "dmd_loss": 0.018924249056726693,
+   "gan_generator_loss": 1.1439224809408188,
+   "generator_grad_norm": 0.8634636998176575,
+   "dmd_gradient_norm": 142.89668119271278
+  },
+  "14": {
+   "fake_score_loss": 0.16029528636485338,
+   "gan_classifier_loss": 1.0165677091479302,
+   "guidance_grad_norm": 0.07221087455749511,
+   "dmd_loss": 0.019299521716311573,
+   "gan_generator_loss": 1.1591854035854339,
+   "generator_grad_norm": 0.39875398874282836,
+   "dmd_gradient_norm": 134.91921501228703
+  },
+  "15": {
+   "fake_score_loss": 0.15738467838615178,
+   "gan_classifier_loss": 1.0334138175845147,
+   "guidance_grad_norm": 0.073649932295084,
+   "dmd_loss": 0.017794487718492746,
+   "gan_generator_loss": 1.1407058179378509,
+   "generator_grad_norm": 0.4996373176574707,
+   "dmd_gradient_norm": 135.6803840246184
+  }
+ },
+ "endpoints": {
+  "fake_score_loss": {
+   "reference_mean": 0.16249233450119693,
+   "sigma_seed": 0.0031657156694267306,
+   "delta": 0.006331431338853461
+  },
+  "gan_classifier_loss": {
+   "reference_mean": 1.030003646016121,
+   "sigma_seed": 0.007822813313496777,
+   "delta": 0.015645626626993554
+  },
+  "guidance_grad_norm": {
+   "reference_mean": 0.07304030641913413,
+   "sigma_seed": 0.0006666811231150692,
+   "delta": 0.0013333622462301383
+  },
+  "dmd_loss": {
+   "reference_mean": 0.0185022838646546,
+   "sigma_seed": 0.0008854293157035,
+   "delta": 0.001770858631407
+  },
+  "gan_generator_loss": {
+   "reference_mean": 1.1505256578326224,
+   "sigma_seed": 0.006913644389032818,
+   "delta": 0.013827288778065636
+  },
+  "generator_grad_norm": {
+   "reference_mean": 0.5286073048909505,
+   "sigma_seed": 0.17069669696648498,
+   "delta": 0.34139339393296997
+  },
+  "dmd_gradient_norm": {
+   "reference_mean": 140.8824461814144,
+   "sigma_seed": 4.95997793854885,
+   "delta": 9.9199558770977
+  }
+ }
+}

@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.DS_Store
+._*
+runs/
+records/
+*.pt
+*.pkl
+goal/codex.env

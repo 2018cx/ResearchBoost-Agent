@@ -1,0 +1,85 @@
+{
+ "schema": "numerics-trajectory-frozen@2",
+ "spec": {
+  "note": "paired-seed short trajectories: the real entrypoint and training loop on a compressed schedule (per-device batch 4 x accumulation 2 x 4 ranks = global 32, 60 optimizer steps, cosine + warmup 0.03; the seed decides the data order). Endpoints are means over the last 20 steps, averaged over ranks: a canonical training loss, and a probe loss (forward only, no grad, the trainer's own loss) on 32 held-out fixture samples (8 per rank), evaluated after each of those steps. Both endpoints are computed by the bench itself through the model (mean cross entropy over the batch's supervised tokens), not from what the tree's training_step or compute_loss returns: GOAL.md lets a tree choose how the Trainer normalizes a step's loss, so the tree's own number is not comparable between trees. The canonical training loss is the mean over the step's micro-batches, measured with the weights the step trains from.",
+  "case": {
+   "steps": 60,
+   "phase": "default",
+   "probe_steps": [
+    40,
+    60
+   ],
+   "args": {
+    "--per_device_train_batch_size": "4",
+    "--gradient_accumulation_steps": "2",
+    "--max_steps": "60",
+    "--dataloader_num_workers": "2"
+   }
+  },
+  "endpoints": [
+   {
+    "name": "train_loss_last20_canonical",
+    "loss": "canon",
+    "steps": [
+     40,
+     60
+    ]
+   },
+   {
+    "name": "probe_loss_last20",
+    "loss": "probe",
+    "steps": [
+     40,
+     60
+    ]
+   }
+  ]
+ },
+ "k": 2.0,
+ "reference_seeds": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "reference_values": {
+  "0": {
+   "train_loss_last20_canonical": 0.9514795266091823,
+   "probe_loss_last20": 0.48579507544636724
+  },
+  "1": {
+   "train_loss_last20_canonical": 0.9607935059815645,
+   "probe_loss_last20": 0.4774582624435425
+  },
+  "2": {
+   "train_loss_last20_canonical": 0.9433583952486515,
+   "probe_loss_last20": 0.4861226610839367
+  },
+  "3": {
+   "train_loss_last20_canonical": 0.9438492506742477,
+   "probe_loss_last20": 0.484816612303257
+  },
+  "4": {
+   "train_loss_last20_canonical": 0.9450722577050328,
+   "probe_loss_last20": 0.4826926987618208
+  },
+  "5": {
+   "train_loss_last20_canonical": 0.9552571369335056,
+   "probe_loss_last20": 0.48172441087663176
+  }
+ },
+ "endpoints": {
+  "train_loss_last20_canonical": {
+   "reference_mean": 0.949968345525364,
+   "sigma_seed": 0.007106975758103796,
+   "delta": 0.014213951516207591
+  },
+  "probe_loss_last20": {
+   "reference_mean": 0.48310162015259267,
+   "sigma_seed": 0.0032629433378830873,
+   "delta": 0.006525886675766175
+  }
+ }
+}

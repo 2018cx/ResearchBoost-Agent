@@ -1,0 +1,113 @@
+{
+ "tree": "/tmp/_judge/acc_e",
+ "config": null,
+ "source_digest": "6c1a6bdbc850a493e70bb295f35c57c0fd657af97af30922448efb3bcd4dc4aa",
+ "candidate_environment": {},
+ "status": "INCORRECT",
+ "quick": true,
+ "skip_timing": false,
+ "correctness": {
+  "passed": false,
+  "stage": "structure",
+  "verdict": "structure",
+  "numerics": {
+   "status": "INCORRECT",
+   "measured_tier": "N1",
+   "report": "$WORK/llava/ws/task/reacceptance/e/compare.json",
+   "errors": 0,
+   "exact_failures": [
+    {
+     "where": "mm r0 s0",
+     "check": "dead_gradient",
+     "parameters": [
+      "grad/adamw#0/llava.model.mm_projector.0.bias",
+      "grad/adamw#0/llava.model.mm_projector.0.weight",
+      "grad/adamw#0/llava.model.mm_projector.2.bias",
+      "grad/adamw#0/llava.model.mm_projector.2.weight"
+     ],
+     "count": 4,
+     "note": "the reference has a nonzero gradient for these parameters, the candidate does not (that part of the model no longer trains)"
+    },
+    {
+     "where": "mm r1 s0",
+     "check": "dead_gradient",
+     "parameters": [
+      "grad/adamw#0/llava.model.mm_projector.0.bias",
+      "grad/adamw#0/llava.model.mm_projector.0.weight",
+      "grad/adamw#0/llava.model.mm_projector.2.bias",
+      "grad/adamw#0/llava.model.mm_projector.2.weight"
+     ],
+     "count": 4,
+     "note": "the reference has a nonzero gradient for these parameters, the candidate does not (that part of the model no longer trains)"
+    },
+    {
+     "where": "mm r2 s0",
+     "check": "dead_gradient",
+     "parameters": [
+      "grad/adamw#0/llava.model.mm_projector.0.bias",
+      "grad/adamw#0/llava.model.mm_projector.0.weight",
+      "grad/adamw#0/llava.model.mm_projector.2.bias",
+      "grad/adamw#0/llava.model.mm_projector.2.weight"
+     ],
+     "count": 4,
+     "note": "the reference has a nonzero gradient for these parameters, the candidate does not (that part of the model no longer trains)"
+    },
+    {
+     "where": "mm r3 s0",
+     "check": "dead_gradient",
+     "parameters": [
+      "grad/adamw#0/llava.model.mm_projector.0.bias",
+      "grad/adamw#0/llava.model.mm_projector.0.weight",
+      "grad/adamw#0/llava.model.mm_projector.2.bias",
+      "grad/adamw#0/llava.model.mm_projector.2.weight"
+     ],
+     "count": 4,
+     "note": "the reference has a nonzero gradient for these parameters, the candidate does not (that part of the model no longer trains)"
+    }
+   ],
+   "bitwise": false,
+   "summary": {
+    "thresholds_sha256": "a6906fa58f080e50097ba1b7af688b6cacc0ce7eff8d74e02088a670065a9b3c",
+    "errors": 0,
+    "exact_failures": 4,
+    "violations": 64,
+    "arbitration": 0,
+    "unresolved": 64,
+    "excluded": 0,
+    "dtype_changes": 0,
+    "precision_mode_changes": 0,
+    "checked": 9448,
+    "bitwise_identical": 9384,
+    "closest": 10,
+    "traced_only_cases": 0,
+    "bitwise_trusted": true
+   }
+  }
+ },
+ "performance": {
+  "speedup": null
+ },
+ "source_digest_end": "6c1a6bdbc850a493e70bb295f35c57c0fd657af97af30922448efb3bcd4dc4aa",
+ "cost": {
+  "gpu_hours": 0.3984,
+  "gpu_runs": 2,
+  "method": "GPU lock hold time x 4 cards: includes startup, warmup and failed runs"
+ },
+ "inputs": [
+  {
+   "when": "before",
+   "ok": true,
+   "checked": 11,
+   "mismatches": [],
+   "seconds": 13.6
+  },
+  {
+   "when": "after",
+   "ok": true,
+   "checked": 11,
+   "mismatches": [],
+   "seconds": 13.7
+  }
+ ],
+ "evaluator_sha256": "e90e3bdf1e801174345dd439fe2bc4904897625521e67819e9242c3e1b8fc927"
+}

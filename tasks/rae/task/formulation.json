@@ -1,0 +1,269 @@
+{
+ "task": "RAE Stage-1",
+ "version": 1,
+ "prepared": "2026-10-07T18:51:16",
+ "upstream": {
+  "url": "https://github.com/bytetriper/RAE",
+  "commit": "a4d18c4db766419cbe7cb8c02cd9f7ceb0ec9041",
+  "entrypoint": "src/train_stage1.py",
+  "config": "configs/stage1/training/DINOv2-B_decXL.yaml"
+ },
+ "environment": {
+  "python": "$WORK/miniconda3/envs/rae/bin/python",
+  "torch": "2.8.0+cu128",
+  "gpus": "2 x H200-class GPU (sm_90, 700 W cap)",
+  "sandbox": "separate uid, two GPUs, read-only frozen inputs",
+  "math_mode": "default (upstream PyTorch defaults)"
+ },
+ "evaluator_sha256": "ebb5f59a6f8bfe507d487422de2a3ffc26bfab353fa220ee124725127f8b7e44",
+ "assets": {
+  "fixture_timing": {
+   "path": "../assets/fixtures/timing",
+   "sha256": "5f237f7a6b99493ef5307d2a1dde9d6a921f21612e141b5078004fde57a688de",
+   "files": 7680,
+   "source": "ImageNet-1k train, first 10 files of the first 768 classes (sorted), copied"
+  },
+  "fixture_numerics": {
+   "path": "../assets/fixtures/numerics",
+   "sha256": "520e0e634527f33187ca92e0dcbb3e6ece83eb7bfe66ae3882fe74933c012281",
+   "files": 512,
+   "source": "ImageNet-1k train, first 2 files of the first 256 classes (sorted), copied"
+  },
+  "disc_dino": {
+   "path": "../assets/models/discs/dino_vit_small_patch8_224.pth",
+   "sha256": "6f9f986e17efd79810ef82c1f951a1b9824a8db3ee127a7a329d817a3c5d3a7b"
+  },
+  "lpips_vgg": {
+   "path": "../assets/lpips/vgg.pth",
+   "sha256": "a78928a0af1e5f0fcb1f3b9e8f8c3a2a5a3de244d830ad5c1feddc79b8432868"
+  },
+  "hf_cache": {
+   "path": "../cache/huggingface",
+   "sha256": "4e116200f25c75384ae96a854d60efbc4c268fc2585d5ec0c5c5954b6f80f787",
+   "files": 8
+  },
+  "torch_hub": {
+   "path": "../cache/torch",
+   "sha256": "68ac220930fd4d20ab47809ce385c2c338b2cb9148a67f7a4c96d869a8890a34",
+   "files": 1
+  },
+  "resume_states": {
+   "bench/states/mid.r0.pt": "11c6dde1c6a239d140c7df61f704194512028ee3a4cec0215008aaa1867291fe",
+   "bench/states/mid.r1.pt": "1836f5d757b081c2d048bec192b8c0d6a45357ca92115d6de28af083d217aee9"
+  },
+  "thresholds": {
+   "path": "bench/thresholds.json",
+   "sha256": "8475aa3d7965c059b4128bf88250190c055552fa7460d5b83f852922f63e0f75",
+   "note": "diagnostic only (per-tensor gates, pooled; fp64 arbitration)"
+  },
+  "trajectory_frozen": {
+   "path": "bench/traj/frozen.json",
+   "sha256": "6c155ff87feb58d4081da03bdd52b0cd41dc197195d59b667d54bd1131b28341",
+   "reference_seeds": [
+    1000,
+    1001,
+    1002,
+    1003,
+    1004,
+    1005
+   ]
+  }
+ },
+ "deviations_from_upstream": [
+  "per-rank batch 64 on 2 GPUs (local global batch 128) instead of 8 GPUs x 64; target deployment unchanged",
+  "timing config: epochs 3, disc_upd_start 1, disc_start 2, checkpoint_interval 0 (timing only)",
+  "numerics cases: steps_per_epoch 10 (compressed schedule), fixed replayed batches, num_workers 0",
+  "statistical gate trajectories: steps_per_epoch 25 (recon 150 / disc 50 / adversarial 100 steps), numerical equivalence only"
+ ],
+ "evidence": {
+  "deterministic_reproducibility": "deterministic reproducibility: 12496/12496 tensors bitwise identical",
+  "leave_one_out": {
+   "ok": true,
+   "results": [
+    [
+     "ref2",
+     "PASS"
+    ],
+    [
+     "var_decoder_sdpa",
+     "PASS"
+    ],
+    [
+     "var_encoder_eager",
+     "PASS"
+    ],
+    [
+     "var_disc_sdpa",
+     "PASS"
+    ]
+   ]
+  },
+  "selftest": {
+   "ok": true,
+   "failed": []
+  },
+  "trajectory_delta": {
+   "recon_total": 0.01922097763435236,
+   "disc_phase_total": 0.019549558687817062,
+   "disc_phase_d": 0.05434205524802024,
+   "gan_total": 0.0966291578849228,
+   "gan_d": 0.16012401743031937
+  },
+  "gates": {
+   "unchanged": {
+    "status": "PASS",
+    "stage": "bitwise",
+    "verdict": "bitwise",
+    "trajectory_seeds": null,
+    "endpoints": {}
+   },
+   "setup_change": {
+    "status": "ERROR",
+    "stage": "setup_guard",
+    "verdict": null,
+    "trajectory_seeds": null,
+    "endpoints": {}
+   },
+   "stale_dstep": {
+    "status": "INCORRECT",
+    "stage": "bitwise",
+    "verdict": "structure",
+    "trajectory_seeds": null,
+    "endpoints": {}
+   },
+   "qscale": {
+    "status": "PASS",
+    "stage": "statistical (re-judged against the 6-seed delta)",
+    "verdict": "equivalent",
+    "trajectory_seeds": [
+     1000,
+     1001,
+     1002
+    ],
+    "endpoints": {
+     "recon_total": "within",
+     "disc_phase_total": "within",
+     "disc_phase_d": "within",
+     "gan_total": "within",
+     "gan_d": "within"
+    },
+    "first_run_with_3_seed_delta": {
+     "status": "INCORRECT",
+     "stage": "statistical",
+     "verdict": "different",
+     "trajectory_seeds": [
+      1000,
+      1001,
+      1002
+     ],
+     "endpoints": {
+      "recon_total": "within",
+      "disc_phase_total": "within",
+      "disc_phase_d": "within",
+      "gan_total": "within",
+      "gan_d": "deviates"
+     }
+    }
+   },
+   "lpips_detach": {
+    "status": "INCORRECT",
+    "stage": "statistical (re-judged against the 6-seed delta)",
+    "verdict": "different",
+    "trajectory_seeds": [
+     1000,
+     1001,
+     1002
+    ],
+    "endpoints": {
+     "recon_total": "deviates",
+     "disc_phase_total": "deviates",
+     "disc_phase_d": "deviates",
+     "gan_total": "deviates",
+     "gan_d": "within"
+    },
+    "first_run_with_3_seed_delta": {
+     "status": "INCORRECT",
+     "stage": "statistical",
+     "verdict": "different",
+     "trajectory_seeds": [
+      1000,
+      1001,
+      1002
+     ],
+     "endpoints": {
+      "recon_total": "deviates",
+      "disc_phase_total": "deviates",
+      "disc_phase_d": "deviates",
+      "gan_total": "deviates",
+      "gan_d": "deviates"
+     }
+    }
+   }
+  },
+  "expected": {
+   "unchanged": "PASS bitwise",
+   "setup_change": "ERROR setup_guard",
+   "stale_dstep": "INCORRECT structure",
+   "qscale": "PASS equivalent",
+   "lpips_detach": "INCORRECT different"
+  },
+  "baseline": {
+   "path": "work/formulation/baseline/baseline.json",
+   "reference_weighted_ms": 1835.53,
+   "reference_spread": 0.0005
+  },
+  "bench_fp32v2_smoke": {
+   "path": "work/formulation/smoke_fp32v2_quick/check.json",
+   "status": "PASS",
+   "inputs": [
+    {
+     "when": "before",
+     "ok": true,
+     "checked": 10
+    },
+    {
+     "when": "after",
+     "ok": true,
+     "checked": 10
+    }
+   ]
+  },
+  "bench_fp32v3_smoke": {
+   "path": "work/formulation/smoke_fp32v3_quick/check.json",
+   "status": "PASS",
+   "inputs": [
+    {
+     "when": "before",
+     "ok": true,
+     "checked": 10
+    },
+    {
+     "when": "after",
+     "ok": true,
+     "checked": 10
+    }
+   ]
+  },
+  "bench_fp32v4_smoke": {
+   "path": "work/formulation/smoke_fp32v4_quick/check.json",
+   "status": "PASS",
+   "inputs": [
+    {
+     "when": "before",
+     "ok": true,
+     "checked": 10
+    },
+    {
+     "when": "after",
+     "ok": true,
+     "checked": 10
+    }
+   ]
+  }
+ },
+ "evaluator_fixes": [
+  "10-07 (fp32v2): sweep keeps every run's full fingerprint and marks rows whose fingerprint differs from reference a (beyond the switches) INVALID; sweep, check, time and profile digest the materialized source again at the end and report ERROR if it changed while it ran.",
+  "10-07 (fp32v3): candidate writes result.json with status ERROR (stage evaluation_aborted), the reason and the GPU time spent when the evaluation stops before a verdict; sweep keeps sweep.json when the closing reference cannot run. The node's /tmp was freed (about 41 GiB free).",
+  "10-07 (fp32v4): the formal benefit gate compares the fingerprints of its timing runs (reference, parent, candidate, reference) against the first reference and reports ERROR (not comparable) on any difference beyond the switches."
+ ]
+}

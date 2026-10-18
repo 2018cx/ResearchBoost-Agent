@@ -1,0 +1,43 @@
+{
+ "tree": "/tmp/_judge/acc_b",
+ "config": null,
+ "source_digest": "00cbcede7007a35dc759504870c43d392bce4ec91471d68f2aa710b509a6ae48",
+ "candidate_environment": {},
+ "status": "ERROR",
+ "quick": true,
+ "skip_timing": false,
+ "correctness": {
+  "passed": false,
+  "stage": "setup_guard",
+  "problems": [
+   "train in llava/train/train.py differs from the reference"
+  ],
+  "note": "the adapter and the data probe re-create train() setup from the reference; move the change into a module the training code calls (model, trainer, data, entrypoint)"
+ },
+ "performance": {
+  "speedup": null
+ },
+ "source_digest_end": "00cbcede7007a35dc759504870c43d392bce4ec91471d68f2aa710b509a6ae48",
+ "cost": {
+  "gpu_hours": 0.0,
+  "gpu_runs": 0,
+  "method": "GPU lock hold time x 4 cards: includes startup, warmup and failed runs"
+ },
+ "inputs": [
+  {
+   "when": "before",
+   "ok": true,
+   "checked": 11,
+   "mismatches": [],
+   "seconds": 13.7
+  },
+  {
+   "when": "after",
+   "ok": true,
+   "checked": 11,
+   "mismatches": [],
+   "seconds": 13.5
+  }
+ ],
+ "evaluator_sha256": "e90e3bdf1e801174345dd439fe2bc4904897625521e67819e9242c3e1b8fc927"
+}

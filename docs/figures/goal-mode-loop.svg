@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1007" viewBox="0 0 1440 1007" role="img" aria-labelledby="t"><title id="t">AI4AI optimization loop: one agent, one frozen judge</title>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#8C0000"/></marker><style>text{font-family:"Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif}.title{font-size:34px;font-weight:700;fill:#292122}.sub{font-size:18px;fill:#79696B}.step{font-size:17px;font-weight:700;fill:#8C0000}.label{font-size:23px;font-weight:650;fill:#292122}.body{font-size:17px;fill:#5A4B4D}.small{font-size:15px;fill:#79696B}.line{fill:none;stroke:#8C0000;stroke-width:3;marker-end:url(#arrow)}.alt{fill:none;stroke:#8C0000;stroke-width:2;stroke-dasharray:6 5;marker-end:url(#arrow)}</style></defs>
+<rect width="1440" height="1007" fill="#ffffff"/>
+<text x="64" y="66" class="title">AI4AI · Feedback drives the next experiment</text>
+<text x="64" y="101" class="sub">Freeze the task once → one agent iterates in a sandbox → only the frozen judge decides</text>
+<rect x="64" y="138" width="1312" height="112" rx="16" fill="#FAF5F5"/>
+<text x="90" y="174" class="label">Formulate and freeze (before the agent starts, out of its sight)</text>
+<text x="90" y="204" class="body">Workload, precision and semantics fixed with the owner · reference run · bench time / profile / check · numerics adapter</text>
+<text x="90" y="231" class="body">δ from the reference's own seeds · negative tests and an lr × 1.02 control arm · judge hashed and frozen · GOAL.md</text>
+<rect x="40" y="276" width="1360" height="428" rx="22" fill="none" stroke="#79696B" stroke-width="1.5" stroke-dasharray="7 6"/>
+<rect x="246" y="265" width="747" height="22" fill="#fff"/>
+<text x="256" y="281" class="small">One Codex /goal session · bwrap sandbox · its own GPUs · judge read-only · model via OPENAI_BASE_URL</text>
+<path d="M207 250V300" class="line"/>
+<rect x="64" y="310" width="286" height="156" rx="18" fill="#fff" stroke="#EADFE0" stroke-width="2"/>
+<text x="88" y="346" class="step">01 / PROFILE</text>
+<text x="88" y="381" class="label">Profile the best</text>
+<text x="88" y="414" class="body">Stage → module → op → kernel</text>
+<text x="88" y="441" class="body">Name the top hotspot</text>
+<rect x="404" y="310" width="286" height="156" rx="18" fill="#fff" stroke="#EADFE0" stroke-width="2"/>
+<text x="428" y="346" class="step">02 / EDIT</text>
+<text x="428" y="381" class="label">Attack one hotspot</text>
+<text x="428" y="414" class="body">One bottleneck class</text>
+<text x="428" y="441" class="body">Behind a switch, default off</text>
+<rect x="744" y="310" width="286" height="156" rx="18" fill="#fff" stroke="#EADFE0" stroke-width="2"/>
+<text x="768" y="346" class="step">03 / SCREEN</text>
+<text x="768" y="381" class="label">Time it</text>
+<text x="768" y="414" class="body">bench.py time</text>
+<text x="768" y="441" class="body">+ check --quick when needed</text>
+<rect x="1084" y="310" width="292" height="156" rx="18" fill="#fff" stroke="#EADFE0" stroke-width="2"/>
+<text x="1108" y="346" class="step">04 / CHECK</text>
+<text x="1108" y="381" class="label">Full check</text>
+<text x="1108" y="414" class="body">Once timing hits the target</text>
+<text x="1108" y="441" class="body">bench.py check</text>
+<path d="M350 378H395" class="line"/>
+<path d="M690 378H735" class="line"/>
+<path d="M1030 378H1075" class="line"/>
+<rect x="744" y="524" width="632" height="156" rx="18" fill="#F8ECEC" stroke="#E3B9B7" stroke-width="2"/>
+<text x="768" y="564" class="label">Frozen judge · bench.py check</text>
+<text x="768" y="600" class="body">Structure → benefit → bitwise → statistical</text>
+<text x="768" y="627" class="body">PASS / no_benefit / INCORRECT → check.json</text>
+<text x="768" y="654" class="body">bench/, numerics/, task/ are read-only to the agent</text>
+<rect x="404" y="524" width="286" height="156" rx="18" fill="#fff" stroke="#EADFE0" stroke-width="2"/>
+<text x="428" y="560" class="step">05 / LOG</text>
+<text x="428" y="595" class="label">Record the round</text>
+<text x="428" y="628" class="body">WORK_LOG: profile, change,</text>
+<text x="428" y="655" class="body">result — failures too</text>
+<rect x="64" y="524" width="286" height="156" rx="18" fill="#fff" stroke="#EADFE0" stroke-width="2"/>
+<text x="88" y="560" class="step">06 / NEXT</text>
+<text x="88" y="595" class="label">Next round or stop</text>
+<text x="88" y="628" class="body">Stop at PASS ≥ target, or</text>
+<text x="88" y="655" class="body">a profiled ceiling</text>
+<path d="M1230 466V514" class="line"/>
+<path d="M744 602H701" class="line"/>
+<path d="M404 602H361" class="line"/>
+<path d="M207 524V476" class="line"/>
+<path d="M800 466V495H560V514" class="alt"/>
+<text x="788" y="487" class="small" text-anchor="end">short of target: log it, no full check</text>
+<rect x="64" y="726" width="1312" height="56" rx="14" fill="#fff" stroke="#EADFE0" stroke-width="2"/>
+<text x="88" y="761" class="step">SUPERVISOR</text>
+<text x="218" y="761" class="body">A Claude subagent or a person: reads WORK_LOG, steps in on rules and facts only, never on what to optimize; resumes a stalled goal</text>
+<text x="65" y="822" class="body">A round takes at most 30 minutes from taking the GPU lock; failed and no-gain rounds are logged too.</text>
+<rect x="64" y="856" width="1312" height="95" rx="16" fill="#8C0000"/>
+<text x="90" y="893" class="label" fill="#fff" style="fill:#fff">The point is not to keep the agent running, but to make every round answer one specific question.</text>
+<text x="90" y="925" class="body" style="fill:#F0D9D9;font-size:18px">Reproducible conditions + localized feedback + resumable records</text>
+</svg>

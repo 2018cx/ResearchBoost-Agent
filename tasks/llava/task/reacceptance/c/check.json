@@ -1,0 +1,42 @@
+{
+ "tree": "/tmp/_judge/acc_c",
+ "config": null,
+ "source_digest": "5a16f51db344d8d0956dd6ac7bac9f5a66e17bdbaa21dac3a4f7799b999487e9",
+ "candidate_environment": {},
+ "status": "INCORRECT",
+ "quick": true,
+ "skip_timing": false,
+ "correctness": {
+  "passed": false,
+  "stage": "loader_check",
+  "error": null,
+  "first_differing_batch": 0,
+  "note": "the data pipeline yields different first micro-batches than the reference"
+ },
+ "performance": {
+  "speedup": null
+ },
+ "source_digest_end": "5a16f51db344d8d0956dd6ac7bac9f5a66e17bdbaa21dac3a4f7799b999487e9",
+ "cost": {
+  "gpu_hours": 0.0,
+  "gpu_runs": 0,
+  "method": "GPU lock hold time x 4 cards: includes startup, warmup and failed runs"
+ },
+ "inputs": [
+  {
+   "when": "before",
+   "ok": true,
+   "checked": 11,
+   "mismatches": [],
+   "seconds": 13.6
+  },
+  {
+   "when": "after",
+   "ok": true,
+   "checked": 11,
+   "mismatches": [],
+   "seconds": 13.5
+  }
+ ],
+ "evaluator_sha256": "e90e3bdf1e801174345dd439fe2bc4904897625521e67819e9242c3e1b8fc927"
+}

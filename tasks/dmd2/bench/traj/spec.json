@@ -1,0 +1,168 @@
+{
+ "case": {
+  "steps": 100,
+  "phases": [
+   "gen",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "gen",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "gen",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "gen",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "gen",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "gen",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "gen",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "gen",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "gen",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "gen",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance",
+   "guidance"
+  ],
+  "start_step": 39000,
+  "warmup_step": 20
+ },
+ "note": "compressed schedule: 100 iterations from the published checkpoint's step 39000, learning-rate warmup 20 instead of 500; natural update schedule (a generator update every 10th iteration, a guidance update every iteration); same data, settings and seeds for reference and candidate; deterministic kernels; numerical equivalence only, not quality. last_gen/<key> repeats the latest generator iteration's value on guidance-only iterations, so the endpoint window of 50 iterations averages 5 generator iterations.",
+ "endpoints": [
+  {
+   "name": "fake_score_loss",
+   "loss": "loss_fake_mean",
+   "steps": [
+    50,
+    100
+   ]
+  },
+  {
+   "name": "gan_classifier_loss",
+   "loss": "guidance_cls_loss",
+   "steps": [
+    50,
+    100
+   ]
+  },
+  {
+   "name": "guidance_grad_norm",
+   "loss": "log/guidance_grad_norm",
+   "steps": [
+    50,
+    100
+   ]
+  },
+  {
+   "name": "dmd_loss",
+   "loss": "last_gen/loss_dm",
+   "steps": [
+    50,
+    100
+   ]
+  },
+  {
+   "name": "gan_generator_loss",
+   "loss": "last_gen/gen_cls_loss",
+   "steps": [
+    50,
+    100
+   ]
+  },
+  {
+   "name": "generator_grad_norm",
+   "loss": "last_gen/log/generator_grad_norm",
+   "steps": [
+    50,
+    100
+   ]
+  },
+  {
+   "name": "dmd_gradient_norm",
+   "loss": "last_gen/log/dmtrain_gradient_norm",
+   "steps": [
+    50,
+    100
+   ]
+  }
+ ]
+}

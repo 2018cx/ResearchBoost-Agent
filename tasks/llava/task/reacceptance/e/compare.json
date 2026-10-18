@@ -1,0 +1,972 @@
+{
+ "status": "INCORRECT",
+ "thresholds_sha256": "a6906fa58f080e50097ba1b7af688b6cacc0ce7eff8d74e02088a670065a9b3c",
+ "errors": [],
+ "exact_failures": [
+  {
+   "where": "mm r0 s0",
+   "check": "dead_gradient",
+   "parameters": [
+    "grad/adamw#0/llava.model.mm_projector.0.bias",
+    "grad/adamw#0/llava.model.mm_projector.0.weight",
+    "grad/adamw#0/llava.model.mm_projector.2.bias",
+    "grad/adamw#0/llava.model.mm_projector.2.weight"
+   ],
+   "count": 4,
+   "note": "the reference has a nonzero gradient for these parameters, the candidate does not (that part of the model no longer trains)"
+  },
+  {
+   "where": "mm r1 s0",
+   "check": "dead_gradient",
+   "parameters": [
+    "grad/adamw#0/llava.model.mm_projector.0.bias",
+    "grad/adamw#0/llava.model.mm_projector.0.weight",
+    "grad/adamw#0/llava.model.mm_projector.2.bias",
+    "grad/adamw#0/llava.model.mm_projector.2.weight"
+   ],
+   "count": 4,
+   "note": "the reference has a nonzero gradient for these parameters, the candidate does not (that part of the model no longer trains)"
+  },
+  {
+   "where": "mm r2 s0",
+   "check": "dead_gradient",
+   "parameters": [
+    "grad/adamw#0/llava.model.mm_projector.0.bias",
+    "grad/adamw#0/llava.model.mm_projector.0.weight",
+    "grad/adamw#0/llava.model.mm_projector.2.bias",
+    "grad/adamw#0/llava.model.mm_projector.2.weight"
+   ],
+   "count": 4,
+   "note": "the reference has a nonzero gradient for these parameters, the candidate does not (that part of the model no longer trains)"
+  },
+  {
+   "where": "mm r3 s0",
+   "check": "dead_gradient",
+   "parameters": [
+    "grad/adamw#0/llava.model.mm_projector.0.bias",
+    "grad/adamw#0/llava.model.mm_projector.0.weight",
+    "grad/adamw#0/llava.model.mm_projector.2.bias",
+    "grad/adamw#0/llava.model.mm_projector.2.weight"
+   ],
+   "count": 4,
+   "note": "the reference has a nonzero gradient for these parameters, the candidate does not (that part of the model no longer trains)"
+  }
+ ],
+ "violations": [
+  {
+   "where": "mm r0 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.0.bias",
+   "rel_err": 1.0,
+   "gate": 0.3819075346612505
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.0.weight",
+   "rel_err": 2.2988529212324975,
+   "gate": 0.3226321257495248
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.2.bias",
+   "rel_err": 1.0,
+   "gate": 0.38371010565640695
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.2.weight",
+   "rel_err": 1.055146566932738,
+   "gate": 0.30330171598532096
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.0.bias",
+   "rel_err": 1.0,
+   "gate": 0.025079716534294992
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.0.weight",
+   "rel_err": 2.0002408937834733,
+   "gate": 0.04824842566634553
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.2.bias",
+   "rel_err": 1.0,
+   "gate": 0.03213281609640979
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.2.weight",
+   "rel_err": 1.0780170275656946,
+   "gate": 0.027577253009193503
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.bias/exp_avg",
+   "rel_err": 1.0,
+   "gate": 0.025079711427021537
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.bias/exp_avg_sq",
+   "rel_err": 1.0,
+   "gate": 0.04551891260055618
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.weight/exp_avg",
+   "rel_err": 1.9957529333036121,
+   "gate": 0.04830352264379948
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.weight/exp_avg_sq",
+   "rel_err": 1.2264588136763381,
+   "gate": 0.03561160246660673
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.bias/exp_avg",
+   "rel_err": 1.0,
+   "gate": 0.0321328125288348
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.bias/exp_avg_sq",
+   "rel_err": 1.0,
+   "gate": 0.0469507182945124
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.weight/exp_avg",
+   "rel_err": 1.0842953408450273,
+   "gate": 0.027353305544581093
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.weight/exp_avg_sq",
+   "rel_err": 7.636780114133519,
+   "gate": 0.05397854806767055
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.0.bias",
+   "rel_err": 1.0,
+   "gate": 0.3819075346612505
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.0.weight",
+   "rel_err": 2.663831881074316,
+   "gate": 0.3226321257495248
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.2.bias",
+   "rel_err": 1.0,
+   "gate": 0.38371010565640695
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.2.weight",
+   "rel_err": 1.0412210945906457,
+   "gate": 0.30330171598532096
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.0.bias",
+   "rel_err": 1.0,
+   "gate": 0.025079716534294992
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.0.weight",
+   "rel_err": 2.346653361976327,
+   "gate": 0.04824842566634553
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.2.bias",
+   "rel_err": 1.0,
+   "gate": 0.03213281609640979
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.2.weight",
+   "rel_err": 1.046131408933169,
+   "gate": 0.027577253009193503
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.bias/exp_avg",
+   "rel_err": 1.0,
+   "gate": 0.025079711427021537
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.bias/exp_avg_sq",
+   "rel_err": 1.0,
+   "gate": 0.04551891260055618
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.weight/exp_avg",
+   "rel_err": 2.3467553404431536,
+   "gate": 0.04830352264379948
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.weight/exp_avg_sq",
+   "rel_err": 1.3619947893688977,
+   "gate": 0.03561160246660673
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.bias/exp_avg",
+   "rel_err": 1.0,
+   "gate": 0.0321328125288348
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.bias/exp_avg_sq",
+   "rel_err": 1.0,
+   "gate": 0.0469507182945124
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.weight/exp_avg",
+   "rel_err": 1.0370614921721664,
+   "gate": 0.027353305544581093
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.weight/exp_avg_sq",
+   "rel_err": 5.354646591978596,
+   "gate": 0.05397854806767055
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.0.bias",
+   "rel_err": 1.0,
+   "gate": 0.3819075346612505
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.0.weight",
+   "rel_err": 2.5048061416074505,
+   "gate": 0.3226321257495248
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.2.bias",
+   "rel_err": 1.0,
+   "gate": 0.38371010565640695
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.2.weight",
+   "rel_err": 1.0215940821222014,
+   "gate": 0.30330171598532096
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.0.bias",
+   "rel_err": 1.0,
+   "gate": 0.025079716534294992
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.0.weight",
+   "rel_err": 2.0711687059658725,
+   "gate": 0.04824842566634553
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.2.bias",
+   "rel_err": 1.0,
+   "gate": 0.03213281609640979
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.2.weight",
+   "rel_err": 0.9869257285850467,
+   "gate": 0.027577253009193503
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.bias/exp_avg",
+   "rel_err": 1.0,
+   "gate": 0.025079711427021537
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.bias/exp_avg_sq",
+   "rel_err": 1.0,
+   "gate": 0.04551891260055618
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.weight/exp_avg",
+   "rel_err": 2.0714305544653415,
+   "gate": 0.04830352264379948
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.weight/exp_avg_sq",
+   "rel_err": 1.3097732030692557,
+   "gate": 0.03561160246660673
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.bias/exp_avg",
+   "rel_err": 1.0,
+   "gate": 0.0321328125288348
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.bias/exp_avg_sq",
+   "rel_err": 1.0,
+   "gate": 0.0469507182945124
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.weight/exp_avg",
+   "rel_err": 0.9985932645223938,
+   "gate": 0.027353305544581093
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.weight/exp_avg_sq",
+   "rel_err": 5.793827179092491,
+   "gate": 0.05397854806767055
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.0.bias",
+   "rel_err": 1.0,
+   "gate": 0.3819075346612505
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.0.weight",
+   "rel_err": 2.7390683588733067,
+   "gate": 0.3226321257495248
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.2.bias",
+   "rel_err": 1.0,
+   "gate": 0.38371010565640695
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.2.weight",
+   "rel_err": 0.9832151874310548,
+   "gate": 0.30330171598532096
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.0.bias",
+   "rel_err": 1.0,
+   "gate": 0.025079716534294992
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.0.weight",
+   "rel_err": 2.314418418433169,
+   "gate": 0.04824842566634553
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.2.bias",
+   "rel_err": 1.0,
+   "gate": 0.03213281609640979
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.2.weight",
+   "rel_err": 1.040632034214318,
+   "gate": 0.027577253009193503
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.bias/exp_avg",
+   "rel_err": 1.0,
+   "gate": 0.025079711427021537
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.bias/exp_avg_sq",
+   "rel_err": 1.0,
+   "gate": 0.04551891260055618
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.weight/exp_avg",
+   "rel_err": 2.3112941343809856,
+   "gate": 0.04830352264379948
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.weight/exp_avg_sq",
+   "rel_err": 1.2381314443281068,
+   "gate": 0.03561160246660673
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.bias/exp_avg",
+   "rel_err": 1.0,
+   "gate": 0.0321328125288348
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.bias/exp_avg_sq",
+   "rel_err": 1.0,
+   "gate": 0.0469507182945124
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.weight/exp_avg",
+   "rel_err": 1.0195140579673878,
+   "gate": 0.027353305544581093
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.weight/exp_avg_sq",
+   "rel_err": 6.989635393047686,
+   "gate": 0.05397854806767055
+  }
+ ],
+ "arbitration": [],
+ "unresolved": [
+  {
+   "where": "mm r0 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.0.bias",
+   "rel_err": 1.0,
+   "gate": 0.3819075346612505,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.0.weight",
+   "rel_err": 2.2988529212324975,
+   "gate": 0.3226321257495248,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.2.bias",
+   "rel_err": 1.0,
+   "gate": 0.38371010565640695,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.2.weight",
+   "rel_err": 1.055146566932738,
+   "gate": 0.30330171598532096,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.0.bias",
+   "rel_err": 1.0,
+   "gate": 0.025079716534294992,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.0.weight",
+   "rel_err": 2.0002408937834733,
+   "gate": 0.04824842566634553,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.2.bias",
+   "rel_err": 1.0,
+   "gate": 0.03213281609640979,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.2.weight",
+   "rel_err": 1.0780170275656946,
+   "gate": 0.027577253009193503,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.bias/exp_avg",
+   "rel_err": 1.0,
+   "gate": 0.025079711427021537,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.bias/exp_avg_sq",
+   "rel_err": 1.0,
+   "gate": 0.04551891260055618,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.weight/exp_avg",
+   "rel_err": 1.9957529333036121,
+   "gate": 0.04830352264379948,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.weight/exp_avg_sq",
+   "rel_err": 1.2264588136763381,
+   "gate": 0.03561160246660673,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.bias/exp_avg",
+   "rel_err": 1.0,
+   "gate": 0.0321328125288348,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.bias/exp_avg_sq",
+   "rel_err": 1.0,
+   "gate": 0.0469507182945124,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.weight/exp_avg",
+   "rel_err": 1.0842953408450273,
+   "gate": 0.027353305544581093,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r0 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.weight/exp_avg_sq",
+   "rel_err": 7.636780114133519,
+   "gate": 0.05397854806767055,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.0.bias",
+   "rel_err": 1.0,
+   "gate": 0.3819075346612505,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.0.weight",
+   "rel_err": 2.663831881074316,
+   "gate": 0.3226321257495248,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.2.bias",
+   "rel_err": 1.0,
+   "gate": 0.38371010565640695,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.2.weight",
+   "rel_err": 1.0412210945906457,
+   "gate": 0.30330171598532096,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.0.bias",
+   "rel_err": 1.0,
+   "gate": 0.025079716534294992,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.0.weight",
+   "rel_err": 2.346653361976327,
+   "gate": 0.04824842566634553,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.2.bias",
+   "rel_err": 1.0,
+   "gate": 0.03213281609640979,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.2.weight",
+   "rel_err": 1.046131408933169,
+   "gate": 0.027577253009193503,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.bias/exp_avg",
+   "rel_err": 1.0,
+   "gate": 0.025079711427021537,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.bias/exp_avg_sq",
+   "rel_err": 1.0,
+   "gate": 0.04551891260055618,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.weight/exp_avg",
+   "rel_err": 2.3467553404431536,
+   "gate": 0.04830352264379948,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.weight/exp_avg_sq",
+   "rel_err": 1.3619947893688977,
+   "gate": 0.03561160246660673,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.bias/exp_avg",
+   "rel_err": 1.0,
+   "gate": 0.0321328125288348,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.bias/exp_avg_sq",
+   "rel_err": 1.0,
+   "gate": 0.0469507182945124,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.weight/exp_avg",
+   "rel_err": 1.0370614921721664,
+   "gate": 0.027353305544581093,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r1 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.weight/exp_avg_sq",
+   "rel_err": 5.354646591978596,
+   "gate": 0.05397854806767055,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.0.bias",
+   "rel_err": 1.0,
+   "gate": 0.3819075346612505,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.0.weight",
+   "rel_err": 2.5048061416074505,
+   "gate": 0.3226321257495248,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.2.bias",
+   "rel_err": 1.0,
+   "gate": 0.38371010565640695,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.2.weight",
+   "rel_err": 1.0215940821222014,
+   "gate": 0.30330171598532096,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.0.bias",
+   "rel_err": 1.0,
+   "gate": 0.025079716534294992,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.0.weight",
+   "rel_err": 2.0711687059658725,
+   "gate": 0.04824842566634553,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.2.bias",
+   "rel_err": 1.0,
+   "gate": 0.03213281609640979,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.2.weight",
+   "rel_err": 0.9869257285850467,
+   "gate": 0.027577253009193503,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.bias/exp_avg",
+   "rel_err": 1.0,
+   "gate": 0.025079711427021537,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.bias/exp_avg_sq",
+   "rel_err": 1.0,
+   "gate": 0.04551891260055618,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.weight/exp_avg",
+   "rel_err": 2.0714305544653415,
+   "gate": 0.04830352264379948,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.weight/exp_avg_sq",
+   "rel_err": 1.3097732030692557,
+   "gate": 0.03561160246660673,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.bias/exp_avg",
+   "rel_err": 1.0,
+   "gate": 0.0321328125288348,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.bias/exp_avg_sq",
+   "rel_err": 1.0,
+   "gate": 0.0469507182945124,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.weight/exp_avg",
+   "rel_err": 0.9985932645223938,
+   "gate": 0.027353305544581093,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r2 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.weight/exp_avg_sq",
+   "rel_err": 5.793827179092491,
+   "gate": 0.05397854806767055,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.0.bias",
+   "rel_err": 1.0,
+   "gate": 0.3819075346612505,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.0.weight",
+   "rel_err": 2.7390683588733067,
+   "gate": 0.3226321257495248,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.2.bias",
+   "rel_err": 1.0,
+   "gate": 0.38371010565640695,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "delta/adamw#0/llava.model.mm_projector.2.weight",
+   "rel_err": 0.9832151874310548,
+   "gate": 0.30330171598532096,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.0.bias",
+   "rel_err": 1.0,
+   "gate": 0.025079716534294992,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.0.weight",
+   "rel_err": 2.314418418433169,
+   "gate": 0.04824842566634553,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.2.bias",
+   "rel_err": 1.0,
+   "gate": 0.03213281609640979,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.2.weight",
+   "rel_err": 1.040632034214318,
+   "gate": 0.027577253009193503,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.bias/exp_avg",
+   "rel_err": 1.0,
+   "gate": 0.025079711427021537,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.bias/exp_avg_sq",
+   "rel_err": 1.0,
+   "gate": 0.04551891260055618,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.weight/exp_avg",
+   "rel_err": 2.3112941343809856,
+   "gate": 0.04830352264379948,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.weight/exp_avg_sq",
+   "rel_err": 1.2381314443281068,
+   "gate": 0.03561160246660673,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.bias/exp_avg",
+   "rel_err": 1.0,
+   "gate": 0.0321328125288348,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.bias/exp_avg_sq",
+   "rel_err": 1.0,
+   "gate": 0.0469507182945124,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.weight/exp_avg",
+   "rel_err": 1.0195140579673878,
+   "gate": 0.027353305544581093,
+   "arbitration": "no fp64 reference"
+  },
+  {
+   "where": "mm r3 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.weight/exp_avg_sq",
+   "rel_err": 6.989635393047686,
+   "gate": 0.05397854806767055,
+   "arbitration": "no fp64 reference"
+  }
+ ],
+ "excluded": {},
+ "dtype_changes": [],
+ "precision_mode_changes": [],
+ "checked": 9448,
+ "bitwise_identical": 9384,
+ "closest": [
+  {
+   "ratio": 141.47805725636823,
+   "where": "mm r0 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.weight/exp_avg_sq",
+   "rel_err": 7.636780114133519,
+   "gate": 0.05397854806767055
+  },
+  {
+   "ratio": 129.48913305865665,
+   "where": "mm r3 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.weight/exp_avg_sq",
+   "rel_err": 6.989635393047686,
+   "gate": 0.05397854806767055
+  },
+  {
+   "ratio": 107.33573588954306,
+   "where": "mm r2 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.weight/exp_avg_sq",
+   "rel_err": 5.793827179092491,
+   "gate": 0.05397854806767055
+  },
+  {
+   "ratio": 99.19952988112442,
+   "where": "mm r1 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.2.weight/exp_avg_sq",
+   "rel_err": 5.354646591978596,
+   "gate": 0.05397854806767055
+  },
+  {
+   "ratio": 48.63688979624418,
+   "where": "mm r1 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.0.weight",
+   "rel_err": 2.346653361976327,
+   "gate": 0.04824842566634553
+  },
+  {
+   "ratio": 48.58352376799991,
+   "where": "mm r1 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.weight/exp_avg",
+   "rel_err": 2.3467553404431536,
+   "gate": 0.04830352264379948
+  },
+  {
+   "ratio": 47.96878626544561,
+   "where": "mm r3 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.0.weight",
+   "rel_err": 2.314418418433169,
+   "gate": 0.04824842566634553
+  },
+  {
+   "ratio": 47.84939084929609,
+   "where": "mm r3 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.weight/exp_avg",
+   "rel_err": 2.3112941343809856,
+   "gate": 0.04830352264379948
+  },
+  {
+   "ratio": 42.92717694642965,
+   "where": "mm r2 s0",
+   "tensor": "grad/adamw#0/llava.model.mm_projector.0.weight",
+   "rel_err": 2.0711687059658725,
+   "gate": 0.04824842566634553
+  },
+  {
+   "ratio": 42.88363334783084,
+   "where": "mm r2 s0",
+   "tensor": "optim/adamw/llava.model.mm_projector.0.weight/exp_avg",
+   "rel_err": 2.0714305544653415,
+   "gate": 0.04830352264379948
+  }
+ ],
+ "traced_only_cases": [],
+ "bitwise_trusted": true,
+ "measured_tier": "N1"
+}

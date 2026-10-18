@@ -1,0 +1,107 @@
+{
+ "frozen_inputs": {
+  "vicuna": {
+   "path": "$ASSETS/models/vicuna-7b-v1.5",
+   "sha256": "793c4c94e94d1814bc20e23b09eebbd2cd0c33214e5e63c962e86ff0b3fdb7a6",
+   "files": 10
+  },
+  "clip": {
+   "path": "$ASSETS/models/clip-vit-large-patch14-336",
+   "sha256": "265dfe66bf973a664e763128626ff38e1d6da6d5ef0c5e8d6ee2c77bf120d249",
+   "files": 8
+  },
+  "projector": {
+   "path": "$ASSETS/models/llava-v1.5-mlp2x-336px-pretrain-vicuna-7b-v1.5",
+   "sha256": "5389c9551e590b1bdc2efe1df85fbc9163401a1ff8b6205e6e22843e2400de14",
+   "files": 3
+  },
+  "images": {
+   "path": "$ASSETS/data/images",
+   "sha256": "e508c2c121853808e152090938c62bcb273bf58603e9ece2102a678a96c4e66b",
+   "files": 2319
+  },
+  "fixture": {
+   "path": "$ASSETS/data/fixture",
+   "sha256": "0967abb4dde0001dd856ddcf7f03ed4fb6846521740544bcbe820d9c5c1925fa",
+   "files": 5
+  },
+  "thresholds": {
+   "path": "bench/thresholds.json",
+   "sha256": "fc42d3eec731a5fdf8b25e3fad42ba6575a97052c7fa1fb4dcfaec30bd3bd673"
+  },
+  "traj_frozen": {
+   "path": "bench/traj/frozen.json",
+   "sha256": "a9f38b818a5a736d5ad6def66091266451d4863893f0537234c6851204cf1e86"
+  },
+  "records_ref": {
+   "path": "bench/records/ref",
+   "sha256": "a491bf37766345f53bdcff9f81aac01127f675d35da13aa792988fe8344ae8b4",
+   "files": 16
+  },
+  "timing_reference": {
+   "path": "task/timing/reference.json",
+   "sha256": "c564201099fdf38a651e04befb99fe854531d18c140304936e7e1dc7007d335f"
+  },
+  "cases": {
+   "path": "bench/cases.json",
+   "sha256": "7912967f037635e315cb9d80d9c1b5da6423281941812b5a6167182b15fe1d5a"
+  },
+  "traj_spec": {
+   "path": "bench/traj/spec.json",
+   "sha256": "da41d0aea194d8bb3aac6c09cd164516879734148357d37f32003d8107e308ef"
+  },
+  "loader_reference": {
+   "path": "task/loader_reference.json",
+   "sha256": "c932709c257455a50c858a50dc6a1152e8b5d161448e585e4ec75304da88519c"
+  },
+  "partition_sensitivity": {
+   "path": "task/partition_sensitivity.json",
+   "sha256": "5bf2bc1f2605314f27721268e5effdcf86bd537df807a5107c2ef21eef18eda7"
+  }
+ },
+ "task": "LLaVA-1.5 7B stage-2 full finetune (haotian-liu/LLaVA c121f0432da27facab705978f83c4ada465e46fd), 4 x H20",
+ "workload": {
+  "upstream_recipe": "scripts/v1_5/finetune.sh, unchanged except: 7B instead of 13B, 4 GPUs x per-device 16 x gradient accumulation 2 = global 128 (upstream: 8 x 16 x 1), --report_to none, local paths",
+  "per_gpu_load": "identical to upstream: 16 samples per micro-batch, model_max_length 2048, bf16 + tf32, DeepSpeed ZeRO-3 (scripts/zero3.json), flash-attention 2, gradient checkpointing",
+  "sampler_note": "LLaVATrainer groups megabatches by world_size * gradient_accumulation_steps = 8 * 16 = 128, so each micro-batch holds the same samples as one of upstream's 8 GPUs",
+  "optimizer": "AdamW lr 2e-5, cosine, warmup_ratio 0.03, weight decay 0, no gradient clipping"
+ },
+ "fixture": {
+  "source": "$ASSETS/data/llava_v1_5_mix665k.json",
+  "source_sha256": "ce959ce6e23073ee1cd1a8a2ef1c633768c10d4174327b8b2dc7113b91af6cf8",
+  "seed": 20261010,
+  "method": "Fixture for the LLaVA-1.5 finetune bench: a seeded random subset of llava_v1_5_mix665k.json and only the images it\nneeds, pulled out of the public image zips on hf-mirror by HTTP range requests (central directory + wanted members).\n\nSampling (seed 20261010): image-text samples uniformly at random from all 624,610 image samples (so the source mix\ncoco/gqa/ocr_vqa/textvqa/vg follows the 665k mix), text-only samples uniformly from the 40,688 ShareGPT samples.\n  timing.json   18 x 128 image samples + 2 x 128 text samples (the sampler keeps one megabatch of each modality for\n                the mixed tail, so the body is 17 image steps + 1 text step + the 2 mixed tail steps)\n  case_mm.json  128 image samples (first 128 image samples of timing.json)  -> one optimizer step, image-text\n  case_text.json 128 text samples (first 128 text samples of timing.json)   -> one optimizer step, text only\n  probe.json    24 image + 8 text samples not in timing.json (held-out loss probe for trajectories)\n",
+  "zips": {
+   "coco/train2017/": "https://hf-mirror.com/datasets/pcuenq/coco-2017-mirror/resolve/main/train2017.zip",
+   "gqa/images/": "https://hf-mirror.com/datasets/Feeky929/GQA-images/resolve/main/images.zip",
+   "textvqa/train_images/": "https://hf-mirror.com/datasets/BoyangZ/text_vqa_train_val_images/resolve/main/train_val_images.zip",
+   "vg/VG_100K/": "https://hf-mirror.com/datasets/BoyangZ/VisualGenome_VG_100K_1_and_2/resolve/main/images.zip",
+   "vg/VG_100K_2/": "https://hf-mirror.com/datasets/BoyangZ/VisualGenome_VG_100K_1_and_2/resolve/main/images2.zip",
+   "ocr_vqa/images/": "https://hf-mirror.com/datasets/weizhiwang/llava_v15_instruction_images/resolve/main/ocr_vqa_images_llava_v15.zip"
+  },
+  "images": 2319,
+  "sets": {
+   "timing": {
+    "n": 2560,
+    "sha256": "b3080176f8ffcccb988808179dde5a7505d6208b44bae6174753f1c0117a1603",
+    "text_only": 256
+   },
+   "case_mm": {
+    "n": 128,
+    "sha256": "499ff03d1f441212b8f004aa6525fadc763b65c6c3e0363758a589ef8234f1e1",
+    "text_only": 0
+   },
+   "case_text": {
+    "n": 128,
+    "sha256": "e87a483ea98ca56e7b6385864be02816e92a6e77b8c572fad70839b34ee238ed",
+    "text_only": 128
+   },
+   "probe": {
+    "n": 32,
+    "sha256": "59a729bd8bd7225ebca9c526848c9ceebc2ddf9f571c16fc980087eee16e7154",
+    "text_only": 8
+   }
+  },
+  "manifest": "task/fixture_manifest.json (with the sampled source indices)"
+ }
+}

@@ -1,0 +1,87 @@
+{
+ "precision": "fp32",
+ "world_size": 2,
+ "per_rank_batch": 64,
+ "agent_max_tier": "N2",
+ "reference": "targets/rae/reference",
+ "reference_commit": "a4d18c4db766419cbe7cb8c02cd9f7ceb0ec9041",
+ "assets": {
+  "models": "../assets/models",
+  "lpips_vgg": "../assets/lpips/vgg.pth"
+ },
+ "numerics": {
+  "adapter": "bench.rae_adapter:RaeAdapter",
+  "config": "bench/cfg/numerics.yaml",
+  "fixture": "../assets/fixtures/numerics",
+  "steps_per_epoch": 10,
+  "cases": "bench/cases.json",
+  "sketch_dim": 4096,
+  "ref": "bench/records/ref",
+  "golden": "bench/records/golden",
+  "thresholds": "bench/thresholds.json",
+  "keep_records": false,
+  "exclude": [
+   {
+    "regex": "^loss/disc_accuracy$",
+    "reason": "discrete metric (fraction of logits_real > logits_fake); not training state; its inputs are judged"
+   }
+  ],
+  "deterministic": true
+ },
+ "timing": {
+  "config": "bench/cfg/timing.yaml",
+  "fixture": "../assets/fixtures/timing",
+  "num_workers": 8,
+  "steps_per_epoch": 60,
+  "warmup": [
+   20,
+   10,
+   10
+  ],
+  "window": [
+   20,
+   25,
+   25
+  ],
+  "repeats": 2,
+  "disc_updates": 1,
+  "phase_weights": {
+   "recon": 6,
+   "disc": 2,
+   "gan": 8
+  }
+ },
+ "math_mode": "default",
+ "benefit": {
+  "min_speedup": 1.02,
+  "min_memory_saving": 0.02,
+  "memory_only_in_memory_rounds": true
+ },
+ "trajectory": {
+  "spec": "bench/traj/spec.json",
+  "frozen": "bench/traj/frozen.json",
+  "ref": "bench/traj/ref",
+  "fixture": "../assets/fixtures/timing",
+  "steps_per_epoch": 25,
+  "seed_schedule": [
+   3,
+   6
+  ]
+ },
+ "timeouts_s": {
+  "timing": 1800,
+  "numerics": 1800,
+  "trajectory": 7200
+ },
+ "min_scratch_free_gib": 3,
+ "invalid_run_signatures": [
+  {
+   "regex": "hit config\\.(recompile_limit|cache_size_limit)",
+   "reason": "torch.compile hit the recompile limit: that code runs eager from then on, not the configuration requested"
+  },
+  {
+   "regex": "skipping cudagraphs due to",
+   "reason": "CUDA graphs were requested but skipped: the run measured the path without graphs"
+  }
+ ]
+}

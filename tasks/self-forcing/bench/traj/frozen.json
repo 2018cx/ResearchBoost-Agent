@@ -1,0 +1,114 @@
+{
+ "schema": "numerics-trajectory-frozen@2",
+ "spec": {
+  "case": {
+   "steps": 100,
+   "phase": "train"
+  },
+  "endpoints": [
+   {
+    "name": "critic_loss",
+    "loss": "critic_loss",
+    "steps": [
+     50,
+     100
+    ]
+   },
+   {
+    "name": "critic_grad_norm",
+    "loss": "critic_grad_norm",
+    "steps": [
+     50,
+     100
+    ]
+   },
+   {
+    "name": "generator_loss",
+    "loss": "generator_loss",
+    "steps": [
+     50,
+     100
+    ],
+    "sparse": true
+   },
+   {
+    "name": "generator_grad_norm",
+    "loss": "generator_grad_norm",
+    "steps": [
+     50,
+     100
+    ],
+    "sparse": true
+   }
+  ]
+ },
+ "k": 2.0,
+ "reference_seeds": [
+  1000,
+  1001,
+  1002,
+  1003,
+  1004,
+  1005
+ ],
+ "reference_values": {
+  "1000": {
+   "critic_loss": 0.22456298828125,
+   "critic_grad_norm": 0.5415436805784702,
+   "generator_loss": 0.0939448431134224,
+   "generator_grad_norm": 0.26539658680558204
+  },
+  "1001": {
+   "critic_loss": 0.1095166015625,
+   "critic_grad_norm": 0.5302965672314167,
+   "generator_loss": 0.1687382130883634,
+   "generator_grad_norm": 0.6198165617883206
+  },
+  "1002": {
+   "critic_loss": 0.1593017578125,
+   "critic_grad_norm": 0.5137154671549797,
+   "generator_loss": 0.13846308197826146,
+   "generator_grad_norm": 0.5895475946366787
+  },
+  "1003": {
+   "critic_loss": 0.1335791015625,
+   "critic_grad_norm": 0.46540971897542477,
+   "generator_loss": 0.16627868143841623,
+   "generator_grad_norm": 0.32554851323366163
+  },
+  "1004": {
+   "critic_loss": 0.14621337890625,
+   "critic_grad_norm": 0.43000682279467584,
+   "generator_loss": 0.1581178934313357,
+   "generator_grad_norm": 0.4126218527555466
+  },
+  "1005": {
+   "critic_loss": 0.16394287109375,
+   "critic_grad_norm": 0.5343483528494835,
+   "generator_loss": 0.16122033540159464,
+   "generator_grad_norm": 0.3917483389377594
+  }
+ },
+ "endpoints": {
+  "critic_loss": {
+   "reference_mean": 0.15618611653645834,
+   "sigma_seed": 0.03881712843888635,
+   "delta": 0.0776342568777727
+  },
+  "critic_grad_norm": {
+   "reference_mean": 0.5025534349307418,
+   "sigma_seed": 0.04487336622484984,
+   "delta": 0.08974673244969968
+  },
+  "generator_loss": {
+   "reference_mean": 0.14779384140856563,
+   "sigma_seed": 0.028474516663293648,
+   "delta": 0.056949033326587295
+  },
+  "generator_grad_norm": {
+   "reference_mean": 0.43411324135959145,
+   "sigma_seed": 0.1422349013816349,
+   "delta": 0.2844698027632698
+  }
+ }
+}

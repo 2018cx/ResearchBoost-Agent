@@ -1,0 +1,38 @@
+[
+ {
+  "steps": 100,
+  "phase": "train",
+  "name": "traj_s1000",
+  "seed": 1000
+ },
+ {
+  "steps": 100,
+  "phase": "train",
+  "name": "traj_s1001",
+  "seed": 1001
+ },
+ {
+  "steps": 100,
+  "phase": "train",
+  "name": "traj_s1002",
+  "seed": 1002
+ },
+ {
+  "steps": 100,
+  "phase": "train",
+  "name": "traj_s1003",
+  "seed": 1003
+ },
+ {
+  "steps": 100,
+  "phase": "train",
+  "name": "traj_s1004",
+  "seed": 1004
+ },
+ {
+  "steps": 100,
+  "phase": "train",
+  "name": "traj_s1005",
+  "seed": 1005
+ }
+]

@@ -1,0 +1,9 @@
+{
+ "case": {"steps": 100, "phase": "train"},
+ "endpoints": [
+  {"name": "critic_loss", "loss": "critic_loss", "steps": [50, 100]},
+  {"name": "critic_grad_norm", "loss": "critic_grad_norm", "steps": [50, 100]},
+  {"name": "generator_loss", "loss": "generator_loss", "steps": [50, 100], "sparse": true},
+  {"name": "generator_grad_norm", "loss": "generator_grad_norm", "steps": [50, 100], "sparse": true}
+ ]
+}

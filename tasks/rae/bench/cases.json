@@ -1,0 +1,14 @@
+[
+ {
+  "name": "recon",
+  "seed": 0,
+  "steps": 1,
+  "phase": "recon"
+ },
+ {
+  "name": "gan",
+  "seed": 2,
+  "steps": 1,
+  "phase": "gan"
+ }
+]

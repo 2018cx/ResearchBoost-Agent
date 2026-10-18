@@ -1,0 +1,84 @@
+{
+ "inputs": {
+  "$ASSETS/data/captions_laion_score6.25.pkl": {
+   "kind": "sha256",
+   "value": "5051a4e8745d0c8b0321a36cd22c71823c2054ea34c3a304a3a26c11764c143b"
+  },
+  "$ASSETS/data15/sd_vae_latents_laion_500k_lmdb/data.mdb": {
+   "kind": "stat",
+   "value": "17824956416:1715192209000000000"
+  },
+  "$ASSETS/ckpt15/laion6.25_sd_baseline_8node_guidance1.75_lr1e-5_seed10_dfake10_from_scratch_fid9.28_checkpoint_model_039000/pytorch_model.bin": {
+   "kind": "stat",
+   "value": "3438369029:1791655520846053506"
+  },
+  "$ASSETS/ckpt15/laion6.25_sd_baseline_8node_guidance1.75_lr1e-5_seed10_dfake10_from_scratch_fid9.28_checkpoint_model_039000/pytorch_model_1.bin": {
+   "kind": "stat",
+   "value": "5157733966:1791655542754141869"
+  },
+  "$ASSETS/hf/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/blobs/19da7aaa4b880e59d56843f1fcb4dd9b599c28a1d9d9af7c1143057c8ffae9f1": {
+   "kind": "stat",
+   "value": "3438167540:1791655161098602524"
+  },
+  "$ASSETS/hf/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/blobs/a2b5134f4dbc140d9c11f11cba3233099e00af40f262f136c691fb7d38d2194c": {
+   "kind": "sha256",
+   "value": "a2b5134f4dbc140d9c11f11cba3233099e00af40f262f136c691fb7d38d2194c"
+  },
+  "$ASSETS/hf/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/blobs/d008943c017f0092921106440254dbbe00b6a285f7883ec8ba160c3faad88334": {
+   "kind": "stat",
+   "value": "492265874:1791655179821678040"
+  },
+  "$ASSETS/hf/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/refs/main": {
+   "kind": "sha256",
+   "value": "9f1be15d2e250df94a702bf381da6f56a41c5aaf4591e130365bc1abe2190b44"
+  },
+  "$ASSETS/hf/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14/model_index.json": {
+   "kind": "sha256",
+   "value": "e2f6f22e274374010aec30c79eb2d6e53fff4a36ac0225523a92cb2d41a83347"
+  },
+  "$ASSETS/hf/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14/scheduler/scheduler_config.json": {
+   "kind": "sha256",
+   "value": "699cce92eb7c122e2eb7dfdea78e6187fda76a5ed4a8e42319b85610e620e091"
+  },
+  "$ASSETS/hf/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14/text_encoder/config.json": {
+   "kind": "sha256",
+   "value": "845df614cb9327ae7bbea027316246fae917827407da6df13572e41b5f93b4cc"
+  },
+  "$ASSETS/hf/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14/text_encoder/model.safetensors": {
+   "kind": "stat",
+   "value": "492265874:1791655179821678040"
+  },
+  "$ASSETS/hf/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14/tokenizer/merges.txt": {
+   "kind": "sha256",
+   "value": "9fd691f7c8039210e0fced15865466c65820d09b63988b0174bfe25de299051a"
+  },
+  "$ASSETS/hf/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14/tokenizer/special_tokens_map.json": {
+   "kind": "sha256",
+   "value": "c4864a9376a8401918425bed71fc14fc0e81f9b59ec45c1cf96cccb2df508eac"
+  },
+  "$ASSETS/hf/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14/tokenizer/tokenizer_config.json": {
+   "kind": "sha256",
+   "value": "00439066fcba73de57644cf41e4e3b9f2dbb09d7f3fc2005898ba52399045882"
+  },
+  "$ASSETS/hf/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14/tokenizer/vocab.json": {
+   "kind": "sha256",
+   "value": "e089ad92ba36837a0d31433e555c8f45fe601ab5c221d4f607ded32d9f7a4349"
+  },
+  "$ASSETS/hf/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14/unet/config.json": {
+   "kind": "sha256",
+   "value": "78f474de6bab3d893868f37be97b636ae65c0df3073ed3256ca458ff599b5f96"
+  },
+  "$ASSETS/hf/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14/unet/diffusion_pytorch_model.safetensors": {
+   "kind": "stat",
+   "value": "3438167540:1791655161098602524"
+  },
+  "$ASSETS/hf/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14/vae/config.json": {
+   "kind": "sha256",
+   "value": "786a7d21647ddea6a04b9675c03d3cb45e90a2f3c6da5fbda2c54ade040036de"
+  },
+  "$ASSETS/hf/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14/vae/diffusion_pytorch_model.safetensors": {
+   "kind": "sha256",
+   "value": "a2b5134f4dbc140d9c11f11cba3233099e00af40f262f136c691fb7d38d2194c"
+  }
+ }
+}

@@ -1,0 +1,227 @@
+{
+ "task": "self_forcing_dmd_training",
+ "reference_commit": "33593df3e81fa3ec10239271dd2c100facac6de1",
+ "inputs": {
+  "../assets/checkpoints/ode_init.pt": {
+   "kind": "stat",
+   "value": "5676203690:1791458202954812294"
+  },
+  "../assets/prompts/vidprom_filtered_extended.txt": {
+   "kind": "sha256",
+   "value": "7896742f468bc8aef9e4547424d1ce0a951acdb2a82233790155401a99bf5aa5"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/.gitattributes": {
+   "kind": "sha256",
+   "value": "fdd55e5c4e2e33c2e24d41fa69d0812e24ea0fa1de516bb0a4593ccf5b1da863"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/LICENSE.txt": {
+   "kind": "sha256",
+   "value": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/README.md": {
+   "kind": "sha256",
+   "value": "d19fb6c377090790940f64af3423c87d289abc9fdee4d45963018e18e5d84119"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/Wan2.1_VAE.pth": {
+   "kind": "stat",
+   "value": "507609880:1791457632314048490"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/assets/.DS_Store": {
+   "kind": "sha256",
+   "value": "d65165279105ca6773180500688df4bdc69a2c7b771752f0a46ef120b7fd8ec3"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/assets/comp_effic.png": {
+   "kind": "sha256",
+   "value": "b0e225caffb4b31295ad150f95ee852e4c3dde4a00ac8f79a2ff500f2ce26b8d"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/assets/data_for_diff_stage.jpg": {
+   "kind": "sha256",
+   "value": "59aec08409f2d46b0e640e4e120dc7cca52c08c3de56d026602dbcff1ebf241a"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/assets/i2v_res.png": {
+   "kind": "sha256",
+   "value": "6823b3206d8d0cb18d3b5b949dec1217f1178109ba11f14e977b67e1f7b8a248"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/assets/logo.png": {
+   "kind": "sha256",
+   "value": "96cddc0f667293436d0b9f92a299b6346b65b231d38ee49719a33d46c91fe1e3"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/assets/t2v_res.jpg": {
+   "kind": "sha256",
+   "value": "91db579092446be2a834bc67721a8e4346936f38c4edb912f459ca3e10f8f439"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/assets/vben_1.3b_vs_sota.png": {
+   "kind": "sha256",
+   "value": "b7705db79f2e1428ec7a1e6fff8c4fbde062fb95bb233516ddbd04b20007c845"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/assets/vben_vs_sota.png": {
+   "kind": "sha256",
+   "value": "9a0e86ca85046d2675f97984b88b6e74df07bba8a62a31ab8a1aef50d4eda44e"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/assets/video_dit_arch.jpg": {
+   "kind": "sha256",
+   "value": "195dceec6570289d8b01cc51d2e28a7786216f19de55b23978a52610d1646a66"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/assets/video_vae_res.jpg": {
+   "kind": "sha256",
+   "value": "d8f9e7f7353848056a615c8ef35ab86ec22976bb46cb27405008b4089701945c"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/config.json": {
+   "kind": "sha256",
+   "value": "ab37994c43740513f94b3ba6233a784035a67b43c8cde83c8f31aa90468c67ce"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/diffusion_pytorch_model.safetensors": {
+   "kind": "stat",
+   "value": "5676070424:1791457920680340950"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/examples/i2v_input.JPG": {
+   "kind": "sha256",
+   "value": "077e3d965090c9028c69c00931675f42e1acc815c6eb450ab291b3b72d211a8e"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/google/umt5-xxl/special_tokens_map.json": {
+   "kind": "sha256",
+   "value": "7b8a9f5040adb67b5805abdfd42c1f8d0f3d0e711f10726580eb3789cd0ad61d"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/google/umt5-xxl/spiece.model": {
+   "kind": "sha256",
+   "value": "e3909a67b780650b35cf529ac782ad2b6b26e6d1f849d3fbb6a872905f452458"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/google/umt5-xxl/tokenizer.json": {
+   "kind": "sha256",
+   "value": "6e197b4d3dbd71da14b4eb255f4fa91c9c1f2068b20a2de2472967ca3d22602b"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/google/umt5-xxl/tokenizer_config.json": {
+   "kind": "sha256",
+   "value": "ed9a3a8b0faa71a70a32847e0435fe036e6e112d4df4edb7bb48a921e344dc05"
+  },
+  "../assets/wan_models/Wan2.1-T2V-1.3B/models_t5_umt5-xxl-enc-bf16.pth": {
+   "kind": "stat",
+   "value": "11361920418:1791458017817537273"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/.gitattributes": {
+   "kind": "sha256",
+   "value": "f53bb67542459d81c01fdb14f5c00eaea00693484053c889181ed63a178b069e"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/LICENSE.txt": {
+   "kind": "sha256",
+   "value": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/README.md": {
+   "kind": "sha256",
+   "value": "448184fe68f994c99be61d0095d29c22b8ecd121e7b1d68d7d16a81fc47880ea"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/Wan2.1_VAE.pth": {
+   "kind": "stat",
+   "value": "507609880:1791458222186693851"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/assets/comp_effic.png": {
+   "kind": "sha256",
+   "value": "b0e225caffb4b31295ad150f95ee852e4c3dde4a00ac8f79a2ff500f2ce26b8d"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/assets/data_for_diff_stage.jpg": {
+   "kind": "sha256",
+   "value": "59aec08409f2d46b0e640e4e120dc7cca52c08c3de56d026602dbcff1ebf241a"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/assets/i2v_res.png": {
+   "kind": "sha256",
+   "value": "6823b3206d8d0cb18d3b5b949dec1217f1178109ba11f14e977b67e1f7b8a248"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/assets/logo.png": {
+   "kind": "sha256",
+   "value": "96cddc0f667293436d0b9f92a299b6346b65b231d38ee49719a33d46c91fe1e3"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/assets/t2v_res.jpg": {
+   "kind": "sha256",
+   "value": "91db579092446be2a834bc67721a8e4346936f38c4edb912f459ca3e10f8f439"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/assets/vben_1.3b_vs_sota.png": {
+   "kind": "sha256",
+   "value": "b7705db79f2e1428ec7a1e6fff8c4fbde062fb95bb233516ddbd04b20007c845"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/assets/vben_vs_sota.png": {
+   "kind": "sha256",
+   "value": "9a0e86ca85046d2675f97984b88b6e74df07bba8a62a31ab8a1aef50d4eda44e"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/assets/video_dit_arch.jpg": {
+   "kind": "sha256",
+   "value": "195dceec6570289d8b01cc51d2e28a7786216f19de55b23978a52610d1646a66"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/assets/video_vae_res.jpg": {
+   "kind": "sha256",
+   "value": "d8f9e7f7353848056a615c8ef35ab86ec22976bb46cb27405008b4089701945c"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/config.json": {
+   "kind": "sha256",
+   "value": "7c9d7887442cb46716380bdf4426933d7cf88cbb31abcb434ea219322f5580ad"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/diffusion_pytorch_model-00001-of-00006.safetensors": {
+   "kind": "stat",
+   "value": "9887603256:1791458698533555068"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/diffusion_pytorch_model-00002-of-00006.safetensors": {
+   "kind": "stat",
+   "value": "9839059648:1791459342308495427"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/diffusion_pytorch_model-00003-of-00006.safetensors": {
+   "kind": "stat",
+   "value": "9839059744:1791459403596294743"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/diffusion_pytorch_model-00004-of-00006.safetensors": {
+   "kind": "stat",
+   "value": "9839059744:1791458820615714512"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/diffusion_pytorch_model-00005-of-00006.safetensors": {
+   "kind": "stat",
+   "value": "9839059744:1791459346072421689"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/diffusion_pytorch_model-00006-of-00006.safetensors": {
+   "kind": "stat",
+   "value": "7910235256:1791459352515295467"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/diffusion_pytorch_model.safetensors.index.json": {
+   "kind": "sha256",
+   "value": "d62743ee76929dc76264d4b86abd710eab38157e17ab12659e66158efb8e069c"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/examples/i2v_input.JPG": {
+   "kind": "sha256",
+   "value": "077e3d965090c9028c69c00931675f42e1acc815c6eb450ab291b3b72d211a8e"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/google/umt5-xxl/special_tokens_map.json": {
+   "kind": "sha256",
+   "value": "7b8a9f5040adb67b5805abdfd42c1f8d0f3d0e711f10726580eb3789cd0ad61d"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/google/umt5-xxl/spiece.model": {
+   "kind": "sha256",
+   "value": "e3909a67b780650b35cf529ac782ad2b6b26e6d1f849d3fbb6a872905f452458"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/google/umt5-xxl/tokenizer.json": {
+   "kind": "sha256",
+   "value": "6e197b4d3dbd71da14b4eb255f4fa91c9c1f2068b20a2de2472967ca3d22602b"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/google/umt5-xxl/tokenizer_config.json": {
+   "kind": "sha256",
+   "value": "ed9a3a8b0faa71a70a32847e0435fe036e6e112d4df4edb7bb48a921e344dc05"
+  },
+  "../assets/wan_models/Wan2.1-T2V-14B/models_t5_umt5-xxl-enc-bf16.pth": {
+   "kind": "stat",
+   "value": "11361920418:1791459365335044316"
+  },
+  "bench/cfg/numerics.yaml": {
+   "kind": "sha256",
+   "value": "f248ae59463c1b557868e88384be69e5d6d6c41a740726424dfa24f0f02db4d4"
+  },
+  "bench/cfg/timing.yaml": {
+   "kind": "sha256",
+   "value": "db0e7e709d8d59d23adf6d654e17f1278ea0a9fcf2d5700209b9ea765639306c"
+  },
+  "bench/cases.json": {
+   "kind": "sha256",
+   "value": "b6eb174be7cda1a6355ec93bf7a6a772db2fdad1b1b303bac7dcb8cb4f93a5a0"
+  },
+  "bench/traj/spec.json": {
+   "kind": "sha256",
+   "value": "923be842aca817285853e44afaf6f7b41d908a1a7cc704824cbd27d0afa28e35"
+  }
+ },
+ "final": false
+}

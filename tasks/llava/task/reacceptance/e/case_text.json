@@ -1,0 +1,1 @@
+[{"name": "text", "seed": 1, "steps": 1, "phase": "default", "args": {"--data_path": "{fixture}/case_text.json", "--max_steps": "1", "--warmup_ratio": "0"}}]

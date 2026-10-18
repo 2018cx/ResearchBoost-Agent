@@ -1,0 +1,110 @@
+{
+ "task": "DMD2 SDv1.5 1-step distillation with the GAN head (tianweiy/DMD2@8d8fa55, experiments/sdv1.5/laion6.25_sd_baseline_8node_guidance1.75_lr5e-7_seed10_dfake10_diffusion1000_gan1e-3_noode_resume_fixdata.sh, resuming from the published 39k checkpoint) on 4 GPUs",
+ "world_size": 4,
+ "per_rank_batch": 32,
+ "agent_max_tier": "N2",
+ "math_mode": "default",
+ "python": "$ASSETS/env/bin/python",
+ "reference": "targets/reference",
+ "reference_commit": "8d8fa55633d47cfb81bbc7a892e7248f9518763f",
+ "gpu_lock": "/tmp/dmd_gpu.lock",
+ "scratch": "/tmp",
+ "cpu_affinity": "64-127",
+ "hf_home": "$ASSETS/hf",
+ "model_id": "stable-diffusion-v1-5/stable-diffusion-v1-5",
+ "nsys": "$ASSETS/nsight/opt/nvidia/nsight-systems/2025.6.3/bin/nsys",
+ "fixture": {
+  "prompts": "$ASSETS/data/captions_laion_score6.25.pkl",
+  "latents": "$ASSETS/data15/sd_vae_latents_laion_500k_lmdb",
+  "ckpt": "$ASSETS/ckpt15/laion6.25_sd_baseline_8node_guidance1.75_lr1e-5_seed10_dfake10_from_scratch_fid9.28_checkpoint_model_039000"
+ },
+ "numerics": {
+  "adapter": "bench.dmd_adapter:DmdAdapter",
+  "cases": "bench/cases.json",
+  "sketch_dim": 4096,
+  "ref": "bench/records/ref",
+  "thresholds": "bench/thresholds.json",
+  "keep_records": false,
+  "exclude": []
+ },
+ "timing": {
+  "warmup": 10,
+  "window": 20,
+  "repeats": 2,
+  "frozen_band": 0.05,
+  "pair_band": 0.03,
+  "window_band": 0.03,
+  "window_band_candidate": 0.1
+ },
+ "benefit": {
+  "min_speedup": 1.02
+ },
+ "trajectory": {
+  "spec": "bench/traj/spec.json",
+  "frozen": "bench/traj/frozen.json",
+  "ref": "bench/traj/ref",
+  "seed_schedule": [
+   3,
+   6
+  ]
+ },
+ "timeouts_s": {
+  "timing": 3600,
+  "profile": 3600,
+  "numerics": 3600,
+  "trajectory": 7200
+ },
+ "min_scratch_free_gib": 200,
+ "reserved_env": [
+  "TMPDIR",
+  "TMP",
+  "TEMP",
+  "TORCHINDUCTOR_CACHE_DIR",
+  "TRITON_CACHE_DIR",
+  "CUDA_CACHE_PATH",
+  "XDG_CACHE_HOME",
+  "MPLCONFIGDIR",
+  "CUDA_VISIBLE_DEVICES",
+  "CUDA_DEVICE_ORDER",
+  "PYTHONPATH",
+  "PYTHONHOME",
+  "PYTHONNOUSERSITE",
+  "HF_HOME",
+  "HF_HUB_OFFLINE",
+  "TRANSFORMERS_OFFLINE",
+  "HF_DATASETS_OFFLINE",
+  "WANDB_MODE",
+  "NVIDIA_TF32_OVERRIDE",
+  "CUBLAS_WORKSPACE_CONFIG",
+  "LD_PRELOAD",
+  "LD_LIBRARY_PATH",
+  "MASTER_ADDR",
+  "MASTER_PORT",
+  "RANK",
+  "WORLD_SIZE",
+  "LOCAL_RANK",
+  "LOCAL_WORLD_SIZE",
+  "ACCELERATE_USE_FSDP",
+  "ACCELERATE_MIXED_PRECISION",
+  "FSDP_SHARDING_STRATEGY",
+  "FSDP_AUTO_WRAP_POLICY",
+  "FSDP_MIN_NUM_PARAMS",
+  "FSDP_OFFLOAD_PARAMS",
+  "FSDP_USE_ORIG_PARAMS",
+  "FSDP_SYNC_MODULE_STATES",
+  "FSDP_STATE_DICT_TYPE",
+  "FSDP_TRANSFORMER_CLS_TO_WRAP",
+  "PATH"
+ ],
+ "invalid_run_signatures": [
+  {
+   "regex": "hit config\\.(recompile_limit|cache_size_limit)",
+   "reason": "torch.compile hit the recompile limit: that code runs eager from then on, not the configuration requested"
+  },
+  {
+   "regex": "skipping cudagraphs due to",
+   "reason": "CUDA graphs were requested but skipped: the run measured the path without graphs"
+  }
+ ],
+ "resume_step": 39000
+}

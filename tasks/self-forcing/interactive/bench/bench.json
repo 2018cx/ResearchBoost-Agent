@@ -1,0 +1,55 @@
+{
+ "task": "Self-Forcing DMD training (guandeh17/Self-Forcing@33593df, configs/self_forcing_dmd.yaml)",
+ "world_size": 2,
+ "per_rank_batch": 1,
+ "update_ratio": 5,
+ "agent_max_tier": "N2",
+ "math_mode": "default",
+ "reference": "targets/self_forcing/reference",
+ "reference_commit": "33593df3e81fa3ec10239271dd2c100facac6de1",
+ "gpu_lock": "/tmp/sf_gpu.lock",
+ "nsys": "$WORK/opt/nsight/bin/nsys",
+ "asset_links": {
+  "wan_models": "../assets/wan_models",
+  "checkpoints": "../assets/checkpoints",
+  "prompts/vidprom_filtered_extended.txt": "../assets/prompts/vidprom_filtered_extended.txt"
+ },
+ "numerics": {
+  "adapter": "bench.sf_adapter:SelfForcingAdapter",
+  "config": "bench/cfg/numerics.yaml",
+  "cases": "bench/cases.json",
+  "sketch_dim": 4096,
+  "ref": "bench/records/ref",
+  "thresholds": "bench/thresholds.json",
+  "keep_records": false,
+  "exclude": []
+ },
+ "timing": {
+  "config": "bench/cfg/timing.yaml",
+  "warmup": 10,
+  "window": 10,
+  "repeats": 2
+ },
+ "benefit": {
+  "min_speedup": 1.02
+ },
+ "trajectory": {
+  "spec": "bench/traj/spec.json",
+  "frozen": "bench/traj/frozen.json",
+  "ref": "bench/traj/ref",
+  "seed_schedule": [3, 6]
+ },
+ "timeouts_s": {
+  "timing": 2400,
+  "profile": 2400,
+  "numerics": 3600,
+  "trajectory": 3600
+ },
+ "min_scratch_free_gib": 3,
+ "invalid_run_signatures": [
+  {"regex": "hit config\\.(recompile_limit|cache_size_limit)",
+   "reason": "torch.compile hit the recompile limit: that code runs eager from then on, not the configuration requested"},
+  {"regex": "skipping cudagraphs due to",
+   "reason": "CUDA graphs were requested but skipped: the run measured the path without graphs"}
+ ]
+}

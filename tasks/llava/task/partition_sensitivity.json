@@ -1,0 +1,26 @@
+{
+ "what": "第 1 关「第一步 logged loss」对「同一批样本、不同合法分配」的敏感度，出题方用参考自己的代码测的",
+ "why": "GOAL.md 2026-10-13 放开了一个 optimizer step 内部的样本分配。第一步 logged loss 是「每个 micro-batch 的 token 平均交叉熵，再在 micro-batch 之间平均」，分配一变，即使训练的是同一批 128 条样本，这个数也会动，所以原来的 0.5% 不再是一个「不可能动」的量。",
+ "quantity": "bench.py time 的 logged_loss 第一条（任何 optimizer step 之前）",
+ "frozen_reference": {
+  "step": "1",
+  "loss": 1.3809
+ },
+ "legal_partitions_measured": 2,
+ "observed": [
+  {
+   "arm": "A",
+   "first_logged_loss": 1.7149,
+   "rel_diff": 0.241871
+  },
+  {
+   "arm": "B",
+   "first_logged_loss": 1.3789,
+   "rel_diff": -0.001448
+  }
+ ],
+ "max_abs_rel_diff": 0.241871,
+ "tolerance": 0.484,
+ "rule": "tolerance = 2 × 观测到的最大偏移，向上取到 0.1%，且不低于原来的 0.005",
+ "note": "两种分配具体怎么构造的记在出题侧（沙箱外），这里不写。样本集合本身由第 0 关和第 2 关的多重集合精确项管，不靠这条界管。"
+}
