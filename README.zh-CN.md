@@ -6,13 +6,13 @@
   <a href="README.md">English</a> | <a href="README.zh-CN.md">简体中文</a>
 </p>
 
-<p align="center">让 AI 加速推动 AI 进步的研究。</p>
+<b><p align="center">用 AI 加速 AI 研究。</p></b>
 
-ResearchBoost-Agent 致力于将 AI 的能力转化为更快的科研迭代，从研究者每天运行的训练代码开始。它自主分析瓶颈、实施优化，并通过冻结的评测协议验证加速收益，让同样的算力预算承载更多探索。
+ResearchBoost-Agent 从研究者日常使用的训练代码入手，用 AI 加快实验迭代。它自主分析性能瓶颈、实现优化，并按照预先固定的评测规则验证加速效果，让研究者在相同算力预算下开展更多实验。
 
 ## 快速开始
 
-给 agent 配好模型端点：
+配置 agent 使用的模型 API：
 
 ```bash
 cp goal/codex.env.example goal/codex.env
@@ -21,48 +21,50 @@ cp goal/codex.env.example goal/codex.env
 
 然后让你的 agent 按 [docs/run-a-task.md](docs/run-a-task.md) 操作。
 
-## 一次运行怎么进行
+## 运行流程
 
-![goal 模式：出题并冻结判卷，之后一个 agent 在沙箱里循环：profile、修改、计时、完整 check、记录](docs/figures/goal-mode-loop.svg)
+![运行流程：定义任务并固定评测规则，随后由 agent 在沙箱内反复分析性能、修改代码、计时、完整评测并记录结果](docs/figures/goal-mode-loop.svg)
 
-1. **出题。** 所有者先定下不能变的东西：上游工作负载和每卡负载、参考精度、训练语义。出题的 agent 为这个任务搭判卷（`bench/` 加一份冻结的 [`numerics/`](numerics)），录参考、冻结 δ，用已知有问题的候选证明每一关都能触发，再写 `GOAL.md`。
-2. **goal 模式运行。** 一个 Codex `/goal` 会话在 bubblewrap 沙箱里拿到工作区、GPU 和 skill 卡。每一轮先对当前最好的版本 profile，挂开关改一个热点，用 `bench.py time` 测，在 `WORK_LOG.md` 记一轮。监督者在外面看护，只在规则和事实层面介入，不给优化方向。见 [docs/goal-mode.md](docs/goal-mode.md)。
-3. **只认判卷。** `bench.py check` 是唯一判据。完整 check 判 PASS 之后，再用真实的端到端训练或评测确认。
+1. **定义任务。** 任务负责人先明确必须保持不变的设置：上游训练工作负载、每张 GPU 的负载、基线数值精度和训练计算逻辑。负责准备任务的 agent 搭建评测程序（`bench/` 和一份固定版本的 [`numerics/`](numerics)），记录基线结果，并固定容差 δ。随后用已知有问题的候选版本验证各项检查能否正确拒绝错误，最后编写 `GOAL.md`。
+2. **运行优化。** 在 bubblewrap 沙箱内，为一个 Codex `/goal` 会话提供工作区、GPU 和技能文档。每轮先分析当前最佳版本的性能，再优化一个瓶颈，并通过配置开关控制是否启用。用 `bench.py time` 计时后，将本轮结果写入 `WORK_LOG.md`。监督 agent 在沙箱外监控运行，仅针对规则执行和事实核对进行干预，不指导优化方向。详见 [docs/goal-mode.md](docs/goal-mode.md)。
+3. **验证结果。** 以 `bench.py check` 的结果作为唯一通过标准。完整评测通过后，再通过实际的端到端训练或评测验证结果。
 
 ## 已有结果
 
-| 任务 | 上游 | 优化时的硬件 | 判卷结论 | 加速 | 代码 |
+下表数值来自各任务预先固定的评测程序，或已通过验证的优化版本的完整训练、评测结果。
+
+| 任务 | 上游 | 优化时的硬件 | 评测结论 | 加速 | 代码 |
 |---|---|---|---|---|---|
-| RAE Stage-1 训练（解码器 + GAN） | bytetriper/RAE @a4d18c4 | 2 × H200 | PASS，统计等价 | **5.32×**；8 × H20 完整训练 16 epoch：rFID 0.541，公开权重 0.569 | [Faster-RAE](https://github.com/AI4AI-for-Anything/Faster-RAE) |
+| RAE Stage-1 训练（解码器 + GAN） | bytetriper/RAE @a4d18c4 | 2 × H200 | PASS，统计等价 | 单步训练加速 **5.32×**；8 × H20 完整训练 16 epoch：rFID 0.541，公开权重 0.569 | [Faster-RAE](https://github.com/AI4AI-for-Anything/Faster-RAE) |
 | Self-Forcing 视频 DMD 训练 | guandeh17/Self-Forcing @33593df | 2 × H200 | PASS，统计等价 | **2.08×** | [Faster-SelfForcing](https://github.com/AI4AI-for-Anything/Faster-SelfForcing) |
-| LLaVA-1.5-7B 第二阶段微调 | haotian-liu/LLaVA @c121f04 | 4 × H20 | PASS，统计等价 | **2.39×**；真实训练 1 epoch，四个评测与官方权重相差 −0.50 ~ +0.44 | [Faster-LLaVA](https://github.com/AI4AI-for-Anything/Faster-LLaVA) |
+| LLaVA-1.5-7B 第二阶段微调 | haotian-liu/LLaVA @c121f04 | 4 × H20 | PASS，统计等价 | **2.39×**；实际训练 1 epoch 后，四项评测得分与使用官方权重的模型相差 −0.50 ~ +0.44 | [Faster-LLaVA](https://github.com/AI4AI-for-Anything/Faster-LLaVA) |
 | DMD2 一步蒸馏（SD1.5 + GAN） | tianweiy/DMD2 @8d8fa55 | 4 × H20 | PASS，统计等价 | **1.72×**；8 × H20 上 FID-30k 8.70，参考 8.65 | [Faster-DMD](https://github.com/AI4AI-for-Anything/Faster-DMD) |
 
-## 判卷
+## 评测
 
-候选只有过了任务的冻结判卷才算数。判卷按顺序逐关判，前一关不过就停：
+候选版本必须通过预先固定的评测。评测依次执行以下检查；某项检查失败后，不再继续：
 
-0. **结构**：判卷要驱动的训练入口没被改动（AST 比对），数据加载逐位相同，精确项全部一致（阶段、调用次数、随机数指纹、学习率、跨卡同步）。
-1. **收益**：参考 → 候选 → 参考，在独立进程里各计时一次；加速不超过 `max(1.02, 1 + 2 × 两次参考相对差)` 就判 no_benefit，不评精度。
-2. **逐位**：短程确定性用例记录的全部张量与参考逐位相同，直接通过。
-3. **统计**：做不到逐位时，跑配对 seed 的训练轨迹，每个终点都必须在 δ 内。δ 取参考自身换 seed 的 2 倍标准差，在看到任何候选之前冻结。
+0. **结构检查**：通过 AST 比对确认评测所调用的训练入口未被修改；数据加载结果逐位一致；训练阶段、调用次数、随机数状态指纹、学习率和跨进程同步等要求精确匹配的项目全部一致。
+1. **性能检查**：按“基线 → 候选版本 → 基线”的顺序，在独立进程中分别计时。加速比若不超过 `max(1.02, 1 + 2 × 两次基线计时的相对差异)`，则判定为无性能收益（`no_benefit`），不再进行数值精度检查。
+2. **逐位一致性检查**：在确定性的短序列测试中，如果记录的全部张量与基线逐位一致，则通过评测。
+3. **统计检查**：如果未达到逐位一致，则使用配对的随机种子分别运行基线和候选版本，比较训练轨迹。各项终点指标与基线的差异必须在容差 δ 内。δ 取基线在不同随机种子下对应指标标准差的两倍，在评测任何候选版本之前固定。
 
-判卷在优化开始前冻结并记哈希，**绝不为了放过某个候选而放宽**，细节见 [docs/judge.md](docs/judge.md)。
+评测程序在优化开始前固定，并记录哈希用于校验，后续不因候选结果而放宽评测规则。详见 [docs/judge.md](docs/judge.md)。
 
-## 出一个新任务
+## 创建新任务
 
-先读 [AGENTS.md](AGENTS.md) 和 [docs/methodology.md](docs/methodology.md)，把 [`goal/templates/FORMULATOR_BRIEF.md`](goal/templates/FORMULATOR_BRIEF.md) 交给出题的 agent，以 [`tasks/dmd2`](tasks/dmd2) 为模板：`GOAL.md`、带 `check` / `time` / `profile` 的 `bench/`、给 [`numerics/`](numerics) 写的任务适配器，以及重建环境、冻结参考的 prep 脚本。
+先阅读 [AGENTS.md](AGENTS.md) 和 [docs/methodology.md](docs/methodology.md)，再将 [`goal/templates/FORMULATOR_BRIEF.md`](goal/templates/FORMULATOR_BRIEF.md) 交给负责准备任务的 agent。以 [`tasks/dmd2`](tasks/dmd2) 为模板，准备任务说明 `GOAL.md`、提供 `check` / `time` / `profile` 命令的评测目录 `bench/`、对接 [`numerics/`](numerics) 的任务适配器，以及用于重建环境和固定基线的准备脚本。
 
 ## 目录
 
 | 路径 | 内容 |
 |---|---|
-| [`docs/`](docs) | 英文文档：[方法](docs/methodology.md)、[判卷](docs/judge.md)、[goal 模式](docs/goal-mode.md)、[运行一个任务](docs/run-a-task.md)、[四个任务的经验](docs/lessons.md) |
-| [`goal/`](goal) | 运行一个 Codex `/goal` 会话：bubblewrap 沙箱、Codex 配置模板和模型访问文件、启动 / 续跑 / 看门狗脚本、给出题和监督 agent 的说明 |
-| [`numerics/`](numerics) | 各任务判卷复制后冻结的等价判定组件：记录、逐位和分档比对、配对 seed 轨迹、任务适配器基类、自测 |
-| [`skills/`](skills) | 8 张 skill 卡，选点前读：`train-opt-*`（分级 profile、计时、动作阶梯、数值验证、融合模式、FSDP 多次前向）和 `sglang-diffusion-*`（扩散模型的 benchmark 与性能手段） |
-| [`tasks/`](tasks) | 每个任务：agent 当时看到的 `GOAL.md`、冻结的判卷代码、存档的判卷记录、监督记录和 prep 脚本 |
+| [`docs/`](docs) | 英文文档：[方法](docs/methodology.md)、[评测](docs/judge.md)、[goal 模式](docs/goal-mode.md)、[任务运行指南](docs/run-a-task.md)、[四个任务的经验](docs/lessons.md) |
+| [`goal/`](goal) | Codex `/goal` 会话的运行工具：bubblewrap 沙箱、Codex 配置模板和模型 API 配置文件、启动 / 恢复运行 / 状态监控脚本，以及任务准备和监督 agent 的说明 |
+| [`numerics/`](numerics) | 各任务评测复制并固定版本的数值等价性检查组件：数据记录、逐位和分级比对、配对随机种子的训练轨迹比对、任务适配器基类及自测 |
+| [`skills/`](skills) | 选择优化方向前阅读的 8 份技能文档：`train-opt-*`（性能分析、计时、分阶段优化步骤、数值验证、算子融合方法、FSDP 多次前向计算）和 `sglang-diffusion-*`（扩散模型的性能测试与优化方法） |
+| [`tasks/`](tasks) | 各任务的材料：agent 使用的 `GOAL.md`、固定版本的评测代码、评测结果存档、监督记录和准备脚本 |
 
 ## 致谢
 
-感谢 [SGLang](https://github.com/sgl-project/sglang) 项目。本项目一部分 kernel 优化相关的 skill 移植自 SGLang：[`skills/sglang-diffusion-benchmark-profile`](skills/sglang-diffusion-benchmark-profile) 和 [`skills/sglang-diffusion-performance`](skills/sglang-diffusion-performance) 改编自 [`python/sglang/multimodal_gen/.agents/skills`](https://github.com/sgl-project/sglang/tree/main/python/sglang/multimodal_gen/.agents/skills) 中的 skill，原项目采用 Apache-2.0 许可证。
+感谢 [SGLang](https://github.com/sgl-project/sglang) 项目。本仓库的部分计算内核优化技能文档移植自 SGLang：[`skills/sglang-diffusion-benchmark-profile`](skills/sglang-diffusion-benchmark-profile) 和 [`skills/sglang-diffusion-performance`](skills/sglang-diffusion-performance) 改编自 [`python/sglang/multimodal_gen/.agents/skills`](https://github.com/sgl-project/sglang/tree/main/python/sglang/multimodal_gen/.agents/skills) 中的技能文档，这些文档采用 Apache-2.0 许可证。
