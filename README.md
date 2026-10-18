@@ -6,7 +6,7 @@
   <a href="README.md">English</a> | <a href="README.zh-CN.md">简体中文</a>
 </p>
 
-<p align="center">AI that accelerates the research that advances AI.</p>
+<b><p align="center">AI that accelerates the research that advances AI.</p></b>
 
 ResearchBoost-Agent turns AI capabilities into faster AI experimentation, starting with the training code researchers run every day. It autonomously profiles bottlenecks, implements optimizations, and validates speedups against a frozen evaluation protocol, turning the same compute budget into more room to explore.
 
