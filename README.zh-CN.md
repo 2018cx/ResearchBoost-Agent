@@ -10,6 +10,19 @@
 
 ResearchBoost-Agent 从研究者日常使用的训练代码入手，用 AI 加快实验迭代。它自主分析性能瓶颈、实现优化，并按照预先固定的评测规则验证加速效果，让研究者在相同算力预算下开展更多实验。
 
+<div align="center">
+<table>
+<tr><td align="center">
+<p><strong>🚀 项目 Blog 与 Wishlist</strong></p>
+<p>我们的项目 Blog 已上线，了解 ResearchBoost 的方法与训练加速成果。<br>
+欢迎通过 Wishlist 提交你希望优化的项目！</p>
+<a href="https://ydove0324.github.io/hx_resume/blog/researchboost/"><img src="https://img.shields.io/badge/Read_the_Blog-7C3AED?style=for-the-badge" height="24" alt="阅读项目 Blog"></a>
+&nbsp;
+<a href="https://ydove0324.github.io/hx_resume/blog/researchboost/#wishlist"><img src="https://img.shields.io/badge/Submit_to_Wishlist-0891B2?style=for-the-badge" height="24" alt="提交项目"></a>
+</td></tr>
+</table>
+</div>
+
 ## 快速开始
 
 配置 agent 使用的模型 API：

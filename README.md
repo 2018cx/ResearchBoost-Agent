@@ -10,6 +10,19 @@
 
 ResearchBoost-Agent turns AI capabilities into faster AI experimentation, starting with the training code researchers run every day. It autonomously profiles bottlenecks, implements optimizations, and validates speedups against a frozen evaluation protocol, turning the same compute budget into more room to explore.
 
+<div align="center">
+<table>
+<tr><td align="center">
+<p><strong>🚀 Project Blog & Wishlist</strong></p>
+<p>Read the story behind ResearchBoost and our training speedups.<br>
+Have a project you want accelerated? Submit it to our Wishlist.</p>
+<a href="https://ydove0324.github.io/hx_resume/blog/researchboost/"><img src="https://img.shields.io/badge/Read_the_Blog-7C3AED?style=for-the-badge" height="24" alt="Read the project blog"></a>
+&nbsp;
+<a href="https://ydove0324.github.io/hx_resume/blog/researchboost/#wishlist"><img src="https://img.shields.io/badge/Submit_to_Wishlist-0891B2?style=for-the-badge" height="24" alt="Submit a project"></a>
+</td></tr>
+</table>
+</div>
+
 ## Quick start
 
 Give the agent access to a model endpoint:
