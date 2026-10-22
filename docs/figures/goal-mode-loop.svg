@@ -6,8 +6,8 @@
 <text x="64" y="101" class="sub">Freeze the task once → one agent iterates in a sandbox → only the frozen judge decides</text>
 <rect x="64" y="138" width="1312" height="112" rx="16" fill="#FAF5F5"/>
 <text x="90" y="174" class="label">Formulate and freeze (before the agent starts, out of its sight)</text>
-<text x="90" y="204" class="body">Workload, precision and semantics fixed with the owner · reference run · bench time / profile / check · numerics adapter</text>
-<text x="90" y="231" class="body">δ from the reference's own seeds · negative tests and an lr × 1.02 control arm · judge hashed and frozen · GOAL.md</text>
+<text x="90" y="204" class="body">Workload, precision and semantics fixed with the owner · baseline run · bench time / profile / check · numerics adapter</text>
+<text x="90" y="231" class="body">δ from the baseline's own seeds · negative tests and an lr × 1.02 control arm · judge hashed and frozen · GOAL.md</text>
 <rect x="40" y="276" width="1360" height="428" rx="22" fill="none" stroke="#79696B" stroke-width="1.5" stroke-dasharray="7 6"/>
 <rect x="246" y="265" width="747" height="22" fill="#fff"/>
 <text x="256" y="281" class="small">One Codex /goal session · bwrap sandbox · its own GPUs · judge read-only · model via OPENAI_BASE_URL</text>

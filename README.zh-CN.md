@@ -51,7 +51,7 @@ cp goal/codex.env.example goal/codex.env
 | RAE Stage-1 训练（解码器 + GAN） | bytetriper/RAE @a4d18c4 | 2 × H200 | PASS，统计等价 | 单步训练加速 **5.32×**；8 × H20 完整训练 16 epoch：rFID 0.541，公开权重 0.569 | [Faster-RAE](https://github.com/AI4AI-for-Anything/Faster-RAE) |
 | Self-Forcing 视频 DMD 训练 | guandeh17/Self-Forcing @33593df | 2 × H200 | PASS，统计等价 | **2.08×** | [Faster-SelfForcing](https://github.com/AI4AI-for-Anything/Faster-SelfForcing) |
 | LLaVA-1.5-7B 第二阶段微调 | haotian-liu/LLaVA @c121f04 | 4 × H20 | PASS，统计等价 | **2.39×**；实际训练 1 epoch 后，四项评测得分与使用官方权重的模型相差 −0.50 ~ +0.44 | [Faster-LLaVA](https://github.com/AI4AI-for-Anything/Faster-LLaVA) |
-| DMD2 一步蒸馏（SD1.5 + GAN） | tianweiy/DMD2 @8d8fa55 | 4 × H20 | PASS，统计等价 | **1.72×**；8 × H20 上 FID-30k 8.70，参考 8.65 | [Faster-DMD](https://github.com/AI4AI-for-Anything/Faster-DMD) |
+| DMD2 一步蒸馏（SD1.5 + GAN） | tianweiy/DMD2 @8d8fa55 | 4 × H20 | PASS，统计等价 | **1.72×**；8 × H20 上 FID-30k 8.70，基线 8.65 | [Faster-DMD](https://github.com/AI4AI-for-Anything/Faster-DMD) |
 
 ## 评测
 
