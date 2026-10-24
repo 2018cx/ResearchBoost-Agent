@@ -6,19 +6,19 @@ The judge is the core of the method. The agent may try anything, but only a PASS
 
 | Gate | What it checks | Verdict on failure |
 |---|---|---|
-| 0 Structure | The entry points the judge drives (`main()`, `parse_args()`, everything in `train()` outside the per-step loop) match the reference AST; the dataset class yields bitwise-identical batches on the frozen fixture; every exact item of the short cases matches: phase, number of model forward calls, RNG fingerprint before and after each step, learning rate, step counter, cross-rank pattern, tensor names and shapes, all values finite | ERROR / INCORRECT |
-| 1 Benefit | Reference → candidate → reference in three independent processes with cold compile caches; every window is accepted on its own (a window ratio that drifts from the frozen reference is INVALID and rerun); the speedup must exceed `max(1.02, 1 + 2 × relative gap between the two reference runs)` | UNAVAILABLE (no_benefit); precision is not evaluated |
+| 0 Structure | The entry points the judge drives (`main()`, `parse_args()`, everything in `train()` outside the per-step loop) match the baseline AST; the dataset class yields bitwise-identical batches on the frozen fixture; every exact item of the short cases matches: phase, number of model forward calls, RNG fingerprint before and after each step, learning rate, step counter, cross-rank pattern, tensor names and shapes, all values finite | ERROR / INCORRECT |
+| 1 Benefit | Baseline → candidate → baseline in three independent processes with cold compile caches; every window is accepted on its own (a window ratio that drifts from the frozen baseline is INVALID and rerun); the speedup must exceed `max(1.02, 1 + 2 × relative gap between the two baseline runs)` | UNAVAILABLE (no_benefit); precision is not evaluated |
 | 2 Bitwise | In deterministic mode, record 1–2-step cases; every tensor (loss / out / grad / delta / optim / buffer) must match bit for bit. Large tensors are compared through a CountSketch, with norms and hashes stored separately | If not bitwise, go to gate 3 |
 | 3 Statistical | In deterministic mode, paired-seed short trajectories (tens to a few hundred steps), 5–7 endpoints. Start with 3 seeds: any endpoint beyond δ with p < 0.05 fails, all endpoints within δ pass; otherwise extend to 6 seeds, and a mean beyond δ fails | INCORRECT |
 
 - **Exact items come first.** A failed exact item is always INCORRECT: the candidate does something different. ERROR is only for the case where every exact item holds but the tensors still disagree.
 - **Tiers.** N0 = everything bitwise identical, with no change of dtype or math mode; N1 = the same real-valued function; N2 = a change of dtype or accumulation precision. Anything beyond N2 is INCORRECT. **Never trust the tier a candidate claims for itself**: a change of an internal accumulator's dtype does not show up in the judge's dtype inventory and can only be found by reading the code.
-- **δ** is twice the standard deviation of the reference across its own seeds, frozen before any candidate is seen. Every candidate is compared with the **original reference**, never with the previously accepted candidate.
-- **Control arm.** Apply a small known perturbation to the reference (for example `lr × 1.02`); the statistical gate must reject it as INCORRECT, otherwise it is not sensitive enough.
+- **δ** is twice the standard deviation of the baseline across its own seeds, frozen before any candidate is seen. Every candidate is compared with the **original baseline**, never with the previously accepted candidate.
+- **Control arm.** Apply a small known perturbation to the baseline (for example `lr × 1.02`); the statistical gate must reject it as INCORRECT, otherwise it is not sensitive enough.
 
 ## When the judge may change, and when it may not
 
-- **Relax only where the reference itself cannot comply.** For example, a quantity the reference cannot reproduce bit for bit may be moved out of the bitwise comparison. **Never relax a gate because a candidate cannot meet it**: that amounts to grading your own work. If a candidate cannot meet a gate, let it fail and leave the trade-off to the owner.
+- **Relax only where the baseline itself cannot comply.** For example, a quantity the baseline cannot reproduce bit for bit may be moved out of the bitwise comparison. **Never relax a gate because a candidate cannot meet it**: that amounts to grading your own work. If a candidate cannot meet a gate, let it fail and leave the trade-off to the owner.
 - Wanting to change a gate only after it rejected something requires asking the owner first. The change needs an audit record (`task/judge_changes.md`): the old and new wording, the data that triggered it, a regression table replaying earlier runs under the old and new rules, and a rerun of all four acceptance checks under the new threshold.
 - Relaxing a task constraint (for example allowing samples to be reassigned) changes the **task statement**, not the **judge**. When the task statement changes, the judge is rebuilt for the new statement and re-certified.
 - `evaluator_sha256` covers only the judge code; changing the goal in GOAL.md does not change the hash. Check that the hash is unchanged before every acceptance.
@@ -27,7 +27,7 @@ The judge is the core of the method. The agent may try anything, but only a PASS
 
 | Kind | Example | Caught by |
 |---|---|---|
-| Broken gradient | A bare `swiglu_forward` bypassed autograd; the whole MLP received no gradient; measured 1.456× | the `dead_gradient` exact item (a gradient that is nonzero in the reference must be nonzero in the candidate) |
+| Broken gradient | A bare `swiglu_forward` bypassed autograd; the whole MLP received no gradient; measured 1.456× | the `dead_gradient` exact item (a gradient that is nonzero in the baseline must be nonzero in the candidate) |
 | Cross-rank sync changed | DDP `static_graph` silently changed how gradients were synchronized; 1.7311× | the cross-rank-pattern exact item |
 | Random stream altered | xformers and Triton's file cache drew from the global `random` | the RNG-fingerprint exact item |
 | Compilation inside the timing window | Recompilation on first entry into a new phase | the compile counter |

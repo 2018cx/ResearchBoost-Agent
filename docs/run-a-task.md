@@ -43,9 +43,11 @@ goal/setup_home.sh <task>                   # all cards in skills/, or name them
 goal/setup_home.sh <task> train-opt-tiered-profiling train-opt-measurement train-opt-numerics-validation
 ```
 
-Reference records, reference trajectories and frozen input digests are machine-specific and not stored in this repository. Re-create them inside the sandbox with `PREP=1`: record the reference twice and confirm the two recordings are bitwise identical, record the reference trajectories, freeze δ, and rewrite `task/formulation.json` (the prep README names the script for each step: `formulate.sh` and `freeze_inputs.py` for LLaVA, `bench.py record` and `freeze_traj.sh` for DMD2).
+Baseline records, baseline trajectories and frozen input digests are machine-specific and not stored in this repository. Re-create them inside the sandbox with `PREP=1`: record the baseline twice and confirm the two recordings are bitwise identical, record the baseline trajectories, freeze δ, and rewrite `task/formulation.json` (the prep README names the script for each step: `formulate.sh` and `freeze_inputs.py` for LLaVA, `bench.py record` and `freeze_traj.sh` for DMD2).
 
-## 3. Verify the judge on the reference
+<a id="3-verify-the-judge-on-the-reference"></a>
+
+## 3. Verify the judge on the baseline
 
 Run inside the sandbox, from the workspace (`ws/` is the working directory there). RAE's bench is `bench/run.py` instead of `bench/bench.py`.
 
@@ -57,7 +59,7 @@ PREP=1 $S <task> "0 1 2 3" python bench/bench.py check --tree targets/reference 
 
 Expected in `runs/verify/*/check.json`:
 - quick: `status` PASS, bitwise (gates 0 and 2);
-- full: `status` UNAVAILABLE with verdict `no_benefit` and a measured speedup close to 1.00×. The unmodified reference is not faster than itself, and gate 1 rejects it before any precision gate.
+- full: `status` UNAVAILABLE with verdict `no_benefit` and a measured speedup close to 1.00×. The unmodified baseline is not faster than itself, and gate 1 rejects it before any precision gate.
 
 Then run the task's acceptance script (`accept.sh` for DMD2, `acceptance.sh` and `control_arm.sh` for LLaVA, `accept_quick.sh` for Self-Forcing). Every known-bad tree must fail the gate it targets, the control arm (learning rate × 1.02) must be INCORRECT at the statistical gate, and `python -m numerics selftest` must pass. Do not launch until all of them match.
 

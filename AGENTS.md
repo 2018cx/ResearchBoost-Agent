@@ -11,7 +11,7 @@ This repository describes how an optimization task is prepared, run and judged; 
 ## Hard rules
 
 - **The frozen judge is the only verdict.** Do not write your own timing scripts or report speed any other way. Never weaken a gate to let a candidate through. If a gate rejects something you believe is correct, stop and ask the owner.
-- **Numerics.** The reference precision is the upstream precision. Precision tiers are defined in [`train-opt-numerics-validation`](skills/train-opt-numerics-validation/SKILL.md); anything above N2 is rejected.
+- **Numerics.** The baseline precision is the upstream precision. Precision tiers are defined in [`train-opt-numerics-validation`](skills/train-opt-numerics-validation/SKILL.md); anything above N2 is rejected.
 - **Same code path.** Do not read the judge's environment variables. Do not behave differently while being timed or judged. Timing and trajectory runs must exercise the same configuration.
 - **Data.** Use public code, weights and data. Private data stays on the infrastructure it belongs to: do not copy, stream, presign or list it out.
 - **Shared machines.** Use only the GPUs and directories assigned to you. Never touch other users' processes or files. Use absolute paths in any `rm -rf`.
@@ -24,16 +24,16 @@ This repository describes how an optimization task is prepared, run and judged; 
 tasks/<new>/
   GOAL.md                  # adapt from tasks/dmd2/GOAL.md
   GOAL_LINE.txt            # the /goal line typed at launch
-  bench/                   # check / time / profile entry points; reference-candidate-reference timing
+  bench/                   # check / time / profile entry points; baseline-candidate-baseline timing
   bench/<task>_adapter.py  # build, objects, step, invariants, canonical
   numerics/                # copy ../../numerics and freeze it
   task/formulation.json    # frozen input fingerprints, evaluator hash
-  formulation/prep/        # environment, assets, reference records, acceptance; README lists each script
+  formulation/prep/        # environment, assets, baseline records, acceptance; README lists each script
 ```
 
 Before handing the task to an optimizer:
 
-- Record the reference twice and confirm the two recordings are bitwise identical.
+- Record the baseline twice and confirm the two recordings are bitwise identical.
 - Freeze δ.
 - Run the negative self-tests and the control arm; each must fail the gate it targets.
 - Hash the judge.
