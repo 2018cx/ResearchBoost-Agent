@@ -6,7 +6,12 @@
   <a href="README.md">English</a> | <a href="README.zh-CN.md">简体中文</a>
 </p>
 
-<b><p align="center">AI that accelerates the research that advances AI.</p></b>
+<p align="center"><strong>AI that accelerates the research that advances AI.</strong></p>
+
+<p align="center">
+  <a href="https://ydove0324.github.io/hx_resume/blog/researchboost/"><img src="https://img.shields.io/badge/Blog-7C3AED?style=for-the-badge" alt="Blog"></a>
+  <a href="https://ai4ai-for-anything.github.io/"><img src="https://img.shields.io/badge/Project_Page-0891B2?style=for-the-badge" alt="Project Page"></a>
+</p>
 
 ResearchBoost-Agent turns AI capabilities into faster AI experimentation, starting with the training code researchers run every day. It autonomously profiles bottlenecks, implements optimizations, and validates speedups against a frozen evaluation protocol, turning the same compute budget into more room to explore.
 
@@ -22,6 +27,75 @@ Have a project you want accelerated? Submit it to our Wishlist.</p>
 </td></tr>
 </table>
 </div>
+
+## Results
+
+**12 projects across 5 research domains.** Explore the reports for experiment settings and validation results.
+
+<details>
+<summary><strong>LLM</strong> · 2 projects — NanoChat, YOCO</summary>
+
+| Project | Workload | Speedup |
+|---|---|---:|
+| [Faster-NanoChat](https://github.com/AI4AI-for-Anything/Faster-NanoChat) | D24 (~1.384B) · Tensorwise FP8 training | **1.0744×** |
+| [Faster-YOCO](https://github.com/AI4AI-for-Anything/Faster-YOCO) | YOCO-3B pretraining · BF16, no FP8 | **2.12×** |
+
+[Measurement setup & validation →](docs/results/llm.md)
+
+</details>
+
+<details>
+<summary><strong>MLLM</strong> · 3 projects — LLaVA, BAGEL, R3</summary>
+
+| Project | Workload | Speedup |
+|---|---|---:|
+| [Faster-LLaVA](https://github.com/AI4AI-for-Anything/Faster-LLaVA) | LLaVA-1.5-7B stage-2 fine-tuning | **2.39×** |
+| [Faster-BAGEL](https://github.com/AI4AI-for-Anything/Faster-BAGEL) | 7B-MoT SFT · BF16 compute, no FP8 | **1.82×** |
+| [Faster-R3](https://github.com/AI4AI-for-Anything/Faster-R3) | BAGEL 7B-MoT Tree-RL | **2.08×** |
+
+[Measurement setup & validation →](docs/results/multimodal.md)
+
+</details>
+
+<details>
+<summary><strong>Image Generation</strong> · 3 projects — RAE, DMD2, JiT</summary>
+
+| Project | Workload | Speedup |
+|---|---|---:|
+| [Faster-RAE](https://github.com/AI4AI-for-Anything/Faster-RAE) | Stage-1 decoder + GAN training | **5.32×** |
+| [Faster-DMD](https://github.com/AI4AI-for-Anything/Faster-DMD) | DMD2 one-step SD1.5 distillation + GAN | **1.72×** |
+| [Faster-JiT](https://github.com/AI4AI-for-Anything/Faster-JiT) | JiT-B/16 · ImageNet 256 training | **1.56×** |
+
+[Measurement setup & validation →](docs/results/image-generation.md)
+
+</details>
+
+<details>
+<summary><strong>Video Generation</strong> · 1 project — Self-Forcing</summary>
+
+| Project | Workload | Speedup |
+|---|---|---:|
+| [Faster-SelfForcing](https://github.com/AI4AI-for-Anything/Faster-SelfForcing) | Self-Forcing video DMD training | **2.08×** |
+
+[Measurement setup & validation →](docs/results/video-generation.md)
+
+</details>
+
+<details>
+<summary><strong>Embodied AI</strong> · 3 projects — RoboTwin, Motus, FastWAM</summary>
+
+| Project | Workload | Speedup |
+|---|---|---:|
+| [Faster-RoboTwin](https://github.com/AI4AI-for-Anything/Faster-RoboTwin) | π0.5 policy evaluation · RoboTwin 2.0 | **4.38×** (est.) |
+| [Faster-Motus](https://github.com/AI4AI-for-Anything/Faster-Motus) | RoboTwin 2.0 fine-tuning · 27,244 episodes | **9.59×** |
+| [Faster-FastWAM](https://github.com/AI4AI-for-Anything/Faster-FastWAM) | FastWAM-LIBERO training recipe | **3.46×** |
+
+[Measurement setup & validation →](docs/results/embodied-ai.md)
+
+</details>
+
+
+[Full results index →](docs/results/README.md) · [Interactive results ↗](https://ai4ai-for-anything.github.io/#research)
 
 ## Quick start
 
@@ -49,17 +123,6 @@ Then point your agent at [docs/run-a-task.md](docs/run-a-task.md).
 2. **Run goal mode.** One Codex `/goal` session gets the workspace, the GPUs and the skill cards inside a bubblewrap sandbox. Every round it profiles the current best version, changes one hotspot behind a switch, measures with `bench.py time`, and logs the round in `WORK_LOG.md`. [claw-orchestrator](https://github.com/Enderfga/claw-orchestrator) runs the session: it keeps the Codex thread across restarts and usage limits, and when Codex stops it runs the full check itself. A supervisor watches from outside and intervenes only on rules and facts, never on optimization direction. See [docs/goal-mode.md](docs/goal-mode.md).
 3. **Accept only what the judge accepts.** `bench.py check` is the only verdict. A full-check PASS is then confirmed with a real end-to-end training or evaluation run.
 
-## Results
-
-Every number below was printed by that task's frozen judge, or comes from a full training or evaluation run of the accepted candidate.
-
-| Task | Upstream | Hardware during optimization | Judge verdict | Speedup | Code |
-|---|---|---|---|---|---|
-| RAE Stage-1 training (decoder + GAN) | bytetriper/RAE @a4d18c4 | 2 × H200 | PASS, statistically equivalent | **5.32×** step time; full 16-epoch run on 8 × H20: rFID 0.541 vs 0.569 for the public checkpoint | [Faster-RAE](https://github.com/AI4AI-for-Anything/Faster-RAE) |
-| Self-Forcing video DMD training | guandeh17/Self-Forcing @33593df | 2 × H200 | PASS, statistically equivalent | **2.08×** | [Faster-SelfForcing](https://github.com/AI4AI-for-Anything/Faster-SelfForcing) |
-| LLaVA-1.5-7B stage-2 fine-tuning | haotian-liu/LLaVA @c121f04 | 4 × H20 | PASS, statistically equivalent | **2.39×**; real 1-epoch run: four benchmarks within −0.50 to +0.44 of the official weights | [Faster-LLaVA](https://github.com/AI4AI-for-Anything/Faster-LLaVA) |
-| DMD2 one-step SD1.5 distillation + GAN | tianweiy/DMD2 @8d8fa55 | 4 × H20 | PASS, statistically equivalent | **1.72×**; FID-30k 8.70 vs 8.65 on 8 × H20 | [Faster-DMD](https://github.com/AI4AI-for-Anything/Faster-DMD) |
-
 ## The judge
 
 A candidate counts only if the task's frozen judge accepts it. The judge runs these gates in order and stops at the first one that fails:
@@ -79,6 +142,7 @@ Read [AGENTS.md](AGENTS.md) and [docs/methodology.md](docs/methodology.md), give
 
 | Path | Contents |
 |---|---|
+| [`docs/results/`](docs/results) | Results from 12 projects, grouped by domain, with measurement scope and validation records |
 | [`docs/`](docs) | [Methodology](docs/methodology.md), [the judge](docs/judge.md), [goal mode](docs/goal-mode.md), [running a task](docs/run-a-task.md), [lessons from four tasks](docs/lessons.md) |
 | [`goal/`](goal) | Running one Codex `/goal` session on claw-orchestrator: bubblewrap sandbox, Codex config template and model-access file, run / status / steer / resume scripts and the final check, the watchdog, the brief for the formulating and supervising agent |
 | [`numerics/`](numerics) | The equivalence component every task judge copies and freezes: recording, bitwise and tiered comparison, paired-seed trajectories, the task adapter base class, a self-test |
