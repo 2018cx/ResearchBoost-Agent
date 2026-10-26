@@ -9,9 +9,9 @@
 <p align="center"><strong>AI that accelerates the research that advances AI.</strong></p>
 
 <p align="center">
-  <a href="https://ydove0324.github.io/hx_resume/blog/researchboost/"><img src="https://img.shields.io/badge/Blog-7C3AED?style=for-the-badge" alt="Blog"></a>
-  <a href="https://ai4ai-for-anything.github.io/"><img src="https://img.shields.io/badge/Project_Page-0891B2?style=for-the-badge" alt="Project Page"></a>
-  <a href="https://github.com/AI4AI-for-Anything/ResearchBoost-Agent"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
+  <a href="https://ydove0324.github.io/hx_resume/blog/researchboost/"><img src="https://img.shields.io/static/v1?label=Blog&amp;message=Read&amp;color=7C3AED" alt="Blog"></a> &ensp;
+  <a href="https://ai4ai-for-anything.github.io/"><img src="https://img.shields.io/static/v1?label=Project&amp;message=Page&amp;color=blue&amp;logo=github-pages" alt="Project Page"></a> &ensp;
+  <a href="https://github.com/AI4AI-for-Anything/ResearchBoost-Agent"><img src="https://img.shields.io/static/v1?label=GitHub&amp;message=Code&amp;color=181717&amp;logo=github" alt="GitHub"></a>
 </p>
 
 ResearchBoost-Agent turns AI capabilities into faster AI experimentation, starting with the training code researchers run every day. It autonomously profiles bottlenecks, implements optimizations, and validates speedups against a frozen evaluation protocol, turning the same compute budget into more room to explore.
