@@ -11,7 +11,8 @@
 <p align="center">
   <a href="https://ydove0324.github.io/hx_resume/blog/researchboost/"><img src="https://img.shields.io/static/v1?label=Blog&amp;message=Read&amp;color=7C3AED" alt="Blog"></a> &ensp;
   <a href="https://ai4ai-for-anything.github.io/"><img src="https://img.shields.io/static/v1?label=Project&amp;message=Page&amp;color=blue&amp;logo=github-pages" alt="Project Page"></a> &ensp;
-  <a href="https://github.com/AI4AI-for-Anything/ResearchBoost-Agent"><img src="https://img.shields.io/static/v1?label=GitHub&amp;message=Code&amp;color=181717&amp;logo=github" alt="GitHub"></a>
+  <a href="https://github.com/AI4AI-for-Anything/ResearchBoost-Agent"><img src="https://img.shields.io/static/v1?label=GitHub&amp;message=Code&amp;color=181717&amp;logo=github" alt="GitHub"></a> &ensp;
+  <a href="docs/assets/wechat-group.png"><img src="https://img.shields.io/static/v1?label=WeChat&amp;message=Group&amp;color=07C160&amp;logo=wechat&amp;logoColor=white" alt="WeChat Group"></a>
 </p>
 
 ResearchBoost-Agent turns AI capabilities into faster AI experimentation, starting with the training code researchers run every day. It autonomously profiles bottlenecks, implements optimizations, and validates speedups against a frozen evaluation protocol, turning the same compute budget into more room to explore.
