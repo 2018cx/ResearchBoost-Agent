@@ -102,28 +102,37 @@ Have a project you want accelerated? Submit it to our Wishlist.</p>
 
 ## Quick start
 
-Runs are driven by [claw-orchestrator](https://github.com/Enderfga/claw-orchestrator) on the GPU host:
+On a Linux GPU host where [Codex](https://github.com/openai/codex) or [Claude Code](https://github.com/anthropics/claude-code) already works, paste this to the agent and fill in the three lines:
 
-```bash
-npm install -g @enderfga/claw-orchestrator   # 7.13.0 or later
-clawo serve                                   # keep it running
+```text
+Use ResearchBoost-Agent (https://github.com/AI4AI-for-Anything/ResearchBoost-Agent) to speed up my training code.
+- Code: <git URL or local path of the repository>
+- Training command: <how you launch training, e.g. torchrun --nproc-per-node 4 train.py --config configs/base.yaml>
+- GPUs: <0,1,2,3>   Work directory: <local disk with room for the weights and data, e.g. /data/rba>
+Clone ResearchBoost-Agent and follow its AGENTS.md and goal/templates/FORMULATOR_BRIEF.md: lay out the task with
+goal/init_task.sh, build and verify the frozen judge, launch the optimizer with goal/clawo/run.sh on the same engine
+you are (Codex or Claude Code), supervise it to the end, and report the verified speedup. Do the routine work
+yourself; ask me only about what the brief says the owner decides.
 ```
 
-Give the agent access to a model endpoint:
+The agent installs [claw-orchestrator](https://github.com/Enderfga/claw-orchestrator) (`npm install -g @enderfga/claw-orchestrator`) and starts it, and reuses the model access the host already has (its Codex or Claude Code login, or `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` in the environment); `goal/codex.env` and `goal/claude.env` are only needed for a different endpoint. [bubblewrap](https://github.com/containers/bubblewrap) isolates the agent when the host has it; without it the run still works, guarded by the judge's hashes. Expect the agent to ask you about the workload, the precision and the target speedup: those are your decisions.
 
-```bash
-cp goal/codex.env.example goal/codex.env
-# edit goal/codex.env: set OPENAI_API_KEY and OPENAI_BASE_URL (optionally CODEX_MODEL)
+<details>
+<summary>Reproduce one of the tasks in this repository</summary>
+
+```text
+Use ResearchBoost-Agent (https://github.com/AI4AI-for-Anything/ResearchBoost-Agent): prepare, verify, launch and
+supervise its task tasks/dmd2 on GPUs <0,1,2,3> under the work directory <path>, following docs/run-a-task.md.
 ```
 
-Then point your agent at [docs/run-a-task.md](docs/run-a-task.md).
+</details>
 
 ## How a run works
 
 ![Goal mode: formulate and freeze the judge, then one agent iterates in a sandbox: profile, edit, time, full check, log](docs/figures/goal-mode-loop.svg)
 
 1. **Frame the task.** The owner fixes what may not change: the upstream workload and per-GPU load, the baseline precision, the training semantics. A formulating agent builds the judge for this task (`bench/` plus a frozen copy of [`numerics/`](numerics)), records the baseline, freezes δ, proves with known-bad candidates that every gate fires, and writes `GOAL.md`.
-2. **Run goal mode.** One Codex `/goal` session gets the workspace, the GPUs and the skill cards inside a bubblewrap sandbox. Every round it profiles the current best version, changes one hotspot behind a switch, measures with `bench.py time`, and logs the round in `WORK_LOG.md`. [claw-orchestrator](https://github.com/Enderfga/claw-orchestrator) runs the session: it keeps the Codex thread across restarts and usage limits, and when Codex stops it runs the full check itself. A supervisor watches from outside and intervenes only on rules and facts, never on optimization direction. See [docs/goal-mode.md](docs/goal-mode.md).
+2. **Run goal mode.** One Codex or Claude Code `/goal` session gets the workspace, the GPUs and the skill cards inside a bubblewrap sandbox. Every round it profiles the current best version, changes one hotspot behind a switch, measures with `bench.py time`, and logs the round in `WORK_LOG.md`. [claw-orchestrator](https://github.com/Enderfga/claw-orchestrator) runs the session: it keeps the thread across restarts and usage limits, and when the agent stops it runs the full check itself. A supervisor watches from outside and intervenes only on rules and facts, never on optimization direction. See [docs/goal-mode.md](docs/goal-mode.md).
 3. **Accept only what the judge accepts.** `bench.py check` is the only verdict. A full-check PASS is then confirmed with a real end-to-end training or evaluation run.
 
 ## The judge
@@ -139,7 +148,7 @@ The judge is frozen and hashed before optimization starts and is never relaxed t
 
 ## Starting a new task
 
-Read [AGENTS.md](AGENTS.md) and [docs/methodology.md](docs/methodology.md), give the formulating agent [`goal/templates/FORMULATOR_BRIEF.md`](goal/templates/FORMULATOR_BRIEF.md), and use [`tasks/dmd2`](tasks/dmd2) as the template: `GOAL.md`, a `bench/` with `check` / `time` / `profile`, a task adapter for [`numerics/`](numerics), and the prep scripts that rebuild the environment and freeze the baseline.
+The quick start does this for you. By hand: read [AGENTS.md](AGENTS.md) and [docs/methodology.md](docs/methodology.md), lay out the workspace with [`goal/init_task.sh`](goal/init_task.sh), give the formulating agent [`goal/templates/FORMULATOR_BRIEF.md`](goal/templates/FORMULATOR_BRIEF.md), and use [`tasks/dmd2`](tasks/dmd2) as the template: `GOAL.md`, a `bench/` with `check` / `time` / `profile`, a task adapter for [`numerics/`](numerics), and the prep scripts that rebuild the environment and freeze the baseline.
 
 ## Repository layout
 
@@ -147,7 +156,7 @@ Read [AGENTS.md](AGENTS.md) and [docs/methodology.md](docs/methodology.md), give
 |---|---|
 | [`docs/results/`](docs/results) | Results from 12 projects, grouped by domain, with measurement scope and validation records |
 | [`docs/`](docs) | [Methodology](docs/methodology.md), [the judge](docs/judge.md), [goal mode](docs/goal-mode.md), [running a task](docs/run-a-task.md), [lessons from four tasks](docs/lessons.md) |
-| [`goal/`](goal) | Running one Codex `/goal` session on claw-orchestrator: bubblewrap sandbox, Codex config template and model-access file, run / status / steer / resume scripts and the final check, the watchdog, the brief for the formulating and supervising agent |
+| [`goal/`](goal) | Running one Codex or Claude Code `/goal` session on claw-orchestrator: the task scaffold, the sandbox, model access for both engines, run / status / steer / resume scripts and the final check, the watchdog, the brief for the formulating and supervising agent |
 | [`numerics/`](numerics) | The equivalence component every task judge copies and freezes: recording, bitwise and tiered comparison, paired-seed trajectories, the task adapter base class, a self-test |
 | [`skills/`](skills) | Eight skill cards read before choosing what to try: `train-opt-*` (profiling, measurement, action ladder, numerics validation, fusion patterns, FSDP multi-forward) and `sglang-diffusion-*` (diffusion benchmarking and performance) |
 | [`tasks/`](tasks) | Per task: the `GOAL.md` the agent saw, the frozen judge code, archived judge records, supervision notes and the prep scripts |
