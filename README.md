@@ -102,27 +102,23 @@ Have a project you want accelerated? Submit it to our Wishlist.</p>
 
 ## Quick start
 
-On a Linux GPU host where [Codex](https://github.com/openai/codex) or [Claude Code](https://github.com/anthropics/claude-code) already works, paste this to the agent and fill in the three lines:
+Open Codex or Claude Code on a Linux GPU host, in your training repository or in an empty folder, and paste:
 
 ```text
-Use ResearchBoost-Agent (https://github.com/AI4AI-for-Anything/ResearchBoost-Agent) to speed up my training code.
-- Code: <git URL or local path of the repository>
-- Training command: <how you launch training, e.g. torchrun --nproc-per-node 4 train.py --config configs/base.yaml>
-- GPUs: <0,1,2,3>   Work directory: <local disk with room for the weights and data, e.g. /data/rba>
-Clone ResearchBoost-Agent and follow its AGENTS.md and goal/templates/FORMULATOR_BRIEF.md: lay out the task with
-goal/init_task.sh, build and verify the frozen judge, launch the optimizer with goal/clawo/run.sh on the same engine
-you are (Codex or Claude Code), supervise it to the end, and report the verified speedup. Do the routine work
-yourself; ask me only about what the brief says the owner decides.
+Use ResearchBoost-Agent (https://github.com/AI4AI-for-Anything/ResearchBoost-Agent) to speed up my training.
+Clone it outside my repository and follow goal/templates/FORMULATOR_BRIEF.md from section 0.5.
 ```
 
-The agent installs [claw-orchestrator](https://github.com/Enderfga/claw-orchestrator) (`npm install -g @enderfga/claw-orchestrator`) and starts it, and reuses the model access the host already has (its Codex or Claude Code login, or `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` in the environment); `goal/codex.env` and `goal/claude.env` are only needed for a different endpoint. [bubblewrap](https://github.com/containers/bubblewrap) isolates the agent when the host has it; without it the run still works, guarded by the judge's hashes. Expect the agent to ask you about the workload, the precision and the target speedup: those are your decisions.
+There is nothing to fill in. The agent looks around first (the repository you opened it in, the GPUs, the free disk), then asks with its question tool, each question offering what it found: which code and training command, which GPUs, where to work; then, once it has read the code, the workload, precision and target speedup, which are your decisions. Everything else it does itself: it installs and starts [claw-orchestrator](https://github.com/Enderfga/claw-orchestrator), reuses the model access the host already has (its Codex or Claude Code login, or `OPENAI_API_KEY` / `ANTHROPIC_API_KEY`), builds and verifies the frozen judge, launches the optimizer on the same engine, supervises it, and reports the verified speedup. [bubblewrap](https://github.com/containers/bubblewrap) isolates the optimizer when the host has it; without it the run still works, guarded by the judge's hashes.
+
+Codex shows its question form when started as `codex --enable default_mode_request_user_input`; without it the agent asks the same questions in one message.
 
 <details>
 <summary>Reproduce one of the tasks in this repository</summary>
 
 ```text
-Use ResearchBoost-Agent (https://github.com/AI4AI-for-Anything/ResearchBoost-Agent): prepare, verify, launch and
-supervise its task tasks/dmd2 on GPUs <0,1,2,3> under the work directory <path>, following docs/run-a-task.md.
+Use ResearchBoost-Agent (https://github.com/AI4AI-for-Anything/ResearchBoost-Agent) to reproduce its task tasks/dmd2.
+Clone it and follow docs/run-a-task.md; ask me which GPUs and work directory to use, offering what you find.
 ```
 
 </details>

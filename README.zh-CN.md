@@ -102,26 +102,23 @@ ResearchBoost-Agent 从研究者日常使用的训练代码入手，用 AI 加�
 
 ## 快速开始
 
-在一台已经能用 [Codex](https://github.com/openai/codex) 或 [Claude Code](https://github.com/anthropics/claude-code) 的 Linux GPU 主机上，把下面这段话发给 agent，填好三行即可：
+在 Linux GPU 主机上打开 Codex 或 Claude Code（在你的训练仓库里，或者一个空文件夹里都行），粘贴：
 
 ```text
-用 ResearchBoost-Agent（https://github.com/AI4AI-for-Anything/ResearchBoost-Agent）加速我的训练代码。
-- 代码：<仓库的 git 地址或本地路径>
-- 训练命令：<平时怎么启动训练，例如 torchrun --nproc-per-node 4 train.py --config configs/base.yaml>
-- GPU：<0,1,2,3>   工作目录：<放得下权重和数据的本地盘，例如 /data/rba>
-克隆 ResearchBoost-Agent，按它的 AGENTS.md 和 goal/templates/FORMULATOR_BRIEF.md 执行：用 goal/init_task.sh
-建好任务目录，搭建并验证固定的评测程序，用 goal/clawo/run.sh 以和你相同的引擎（Codex 或 Claude Code）启动优化，
-监督到结束，最后报告经过验证的加速比。常规工作自己完成；只有说明里写明由负责人决定的事项才来问我。
+用 ResearchBoost-Agent（https://github.com/AI4AI-for-Anything/ResearchBoost-Agent）加速我的训练。
+把它克隆到我的仓库之外，从 goal/templates/FORMULATOR_BRIEF.md 第 0.5 节开始执行。
 ```
 
-agent 会自行安装并启动 [claw-orchestrator](https://github.com/Enderfga/claw-orchestrator)（`npm install -g @enderfga/claw-orchestrator`），并沿用主机上已有的模型访问方式（Codex 或 Claude Code 的登录，或环境变量里的 `OPENAI_API_KEY` / `ANTHROPIC_API_KEY`）；只有要换用其他模型接口时才需要填写 `goal/codex.env` 或 `goal/claude.env`。主机装有 [bubblewrap](https://github.com/containers/bubblewrap) 时用它隔离 agent；没有时也能运行，评测程序由哈希校验保护。agent 会就训练负载、数值精度和目标加速比向你确认：这些由你决定。
+不需要填写任何内容。agent 会先查看环境（当前打开的仓库、GPU、磁盘剩余空间），再用它的提问工具逐项询问，每个问题都把查到的情况列成选项：用哪份代码和哪条训练命令、用哪些 GPU、在哪里工作；读完代码后，再询问训练负载、数值精度和目标加速比，这些由你决定。其余工作 agent 自己完成：安装并启动 [claw-orchestrator](https://github.com/Enderfga/claw-orchestrator)，沿用主机上已有的模型访问方式（Codex 或 Claude Code 的登录，或环境变量里的 `OPENAI_API_KEY` / `ANTHROPIC_API_KEY`），搭建并验证固定的评测程序，用同一个引擎启动优化，监督到结束，最后报告经过验证的加速比。主机装有 [bubblewrap](https://github.com/containers/bubblewrap) 时用它隔离负责优化的 agent；没有时也能运行，评测程序由哈希校验保护。
+
+Codex 用 `codex --enable default_mode_request_user_input` 启动时会弹出提问表单；不加这个参数时，agent 会在一条消息里问同样的问题。
 
 <details>
 <summary>复现本仓库中的任务</summary>
 
 ```text
-用 ResearchBoost-Agent（https://github.com/AI4AI-for-Anything/ResearchBoost-Agent）：按 docs/run-a-task.md，
-在工作目录 <路径> 下用 GPU <0,1,2,3> 准备、验证、启动并监督它的任务 tasks/dmd2。
+用 ResearchBoost-Agent（https://github.com/AI4AI-for-Anything/ResearchBoost-Agent）复现它的任务 tasks/dmd2。
+克隆它，按 docs/run-a-task.md 执行；用哪些 GPU、在哪个工作目录，先查看主机情况再列出选项问我。
 ```
 
 </details>
