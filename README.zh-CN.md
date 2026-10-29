@@ -98,7 +98,7 @@ ResearchBoost-Agent 从研究者日常使用的训练代码入手，用 AI 加�
 </details>
 
 
-[完整结果索引（英文） →](docs/results/README.md) · [交互式官网 ↗](https://ai4ai-for-anything.github.io/#research)
+[完整结果索引（英文） →](docs/results/README.md) · [交互式官网 ↗](https://ai4ai-for-anything.github.io/#research) · [贡献你的结果 →](#贡献案例)
 
 ## 快速开始
 
@@ -122,6 +122,17 @@ Codex 用 `codex --enable default_mode_request_user_input` 启动时会弹出提
 ```
 
 </details>
+
+## 贡献案例
+
+用 ResearchBoost-Agent 跑出了结果？欢迎加入[已有结果](#已有结果)。
+
+1. 在你自己的训练代码上跑一遍[快速开始](#快速开始)。
+2. 如果加速比不错，或者优化过程有值得分享的轨迹，按 [case 提交模板](https://github.com/AI4AI-for-Anything/ResearchBoost-Agent/issues/new?template=case-submission.yml)开一个 issue（表单为英文）。
+3. 审核通过后，提一个 pull request，把结果加进已有结果，链接到你自己的仓库。
+4. PR 合并后，你会出现在本仓库的 contributors 中。
+
+审核标准和 PR 格式见 [CONTRIBUTING.md](CONTRIBUTING.md)（英文）。如果是希望我们帮你加速某个项目，请提交到 [Wishlist](https://ydove0324.github.io/hx_resume/blog/researchboost/#wishlist)。
 
 ## 运行流程
 

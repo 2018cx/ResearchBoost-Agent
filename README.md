@@ -98,7 +98,7 @@ Have a project you want accelerated? Submit it to our Wishlist.</p>
 </details>
 
 
-[Full results index →](docs/results/README.md) · [Interactive results ↗](https://ai4ai-for-anything.github.io/#research)
+[Full results index →](docs/results/README.md) · [Interactive results ↗](https://ai4ai-for-anything.github.io/#research) · [Add your case →](#contribute-a-case)
 
 ## Quick start
 
@@ -122,6 +122,17 @@ Clone it and follow docs/run-a-task.md; ask me which GPUs and work directory to 
 ```
 
 </details>
+
+## Contribute a case
+
+Got a result with ResearchBoost-Agent? Add it to [Results](#results).
+
+1. Run the [Quick start](#quick-start) on your own training code.
+2. If you get a solid speedup or a non-trivial optimization trajectory, open a [case submission](https://github.com/AI4AI-for-Anything/ResearchBoost-Agent/issues/new?template=case-submission.yml).
+3. We review it. Once it is accepted, open a pull request that adds your result to Results, linking to your repository.
+4. When the pull request is merged, you appear among this repository's contributors.
+
+Review criteria and the pull request format: [CONTRIBUTING.md](CONTRIBUTING.md). To have us accelerate a project instead, use the [Wishlist](https://ydove0324.github.io/hx_resume/blog/researchboost/#wishlist).
 
 ## How a run works
 
