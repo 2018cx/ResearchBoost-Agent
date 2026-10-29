@@ -13,7 +13,7 @@
 #   TOKEN_BUDGET        tokens the goal may spend   (default: none)
 #   GOAL_TIMEOUT_MIN    wall clock for one goal pass   (default: none)
 #   CLAWO               the clawo CLI   (default clawo on PATH); `clawo serve` is started if it is not running
-#   ASSETS, LOCAL, CODEX_ENV, CLAUDE_ENV, TOOLS, SANDBOX_MODE, SANDBOX_NET, BWRAP   passed on to sandbox.sh when set
+#   ASSETS, LOCAL, CODEX_ENV, CLAUDE_ENV, TOOLS, SANDBOX_MODE, SANDBOX_NET, BWRAP, RO_PATHS   passed on to sandbox.sh when set
 #
 # Writes $WORK/<task>/clawo/{objective.txt,contract.json,judge.sha256,run_id}. Follow the run with status.sh.
 set -euo pipefail
@@ -60,7 +60,7 @@ PY
 # Codex and the checks are started by `clawo serve`, which does not have this shell's environment. Everything
 # sandbox.sh reads is passed explicitly, in front of each command.
 ENVP=(/usr/bin/env "WORK=$WORK")
-for v in ASSETS LOCAL CODEX_ENV CLAUDE_ENV TOOLS SANDBOX_MODE SANDBOX_NET BWRAP; do
+for v in ASSETS LOCAL CODEX_ENV CLAUDE_ENV TOOLS SANDBOX_MODE SANDBOX_NET BWRAP RO_PATHS; do
   if [ -n "${!v:-}" ]; then ENVP+=("$v=${!v}"); fi
 done
 
