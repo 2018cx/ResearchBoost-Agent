@@ -49,6 +49,7 @@ Built on bubblewrap (`SANDBOX_MODE=auto`, the default, picks the first that work
 - the home directory is covered by a tmpfs and only `$WORK/<task>` is exposed (writable); `/var/tmp` is covered too, so other tasks' local data is invisible;
 - the judge directories (`ws/bench`, `ws/numerics`, `ws/task`, `ws/targets`) and `$ASSETS` are read-only; `PREP=1` opens them for writing during formulation;
 - `/tmp` is replaced by `$LOCAL/tmp`;
+- `RO_PATHS` (space-separated) binds host paths read-only before the task's own mounts. Everything else on the host stays writable from inside, so on a shared host set it to the shared filesystems and the local disk other users' data lives on (`RO_PATHS="/fsx /opt/dlami/nvme"`); `$WORK/<task>`, `$ASSETS` and `$LOCAL` beneath them keep their modes;
 - the host's `codex`, `claude` and `node` stay usable, even when installed under the hidden home (`~/.local`, `~/.nvm`, an npm prefix): they are linked from `$LOCAL/bin` and what they need is bound read-only;
 - model access comes only from the env files and the task's home: `CLAUDE*`, `CODEX_*`, `ANTHROPIC_*` and `OPENAI_*` variables inherited from the host are dropped first. That matters when the agent preparing the task is itself Claude Code or Codex: its session exports variables such as `CLAUDE_CONFIG_DIR` or `CODEX_HOME` that would point the engine at that agent's own configuration. A host that needs some of its own environment for the engine (a proxy's CA, a config directory) re-exports it in `$WORK/<task>/sandbox.env`, which is sourced last;
 - `IS_SANDBOX=1` is set, which Claude Code requires to skip permission prompts as root;
@@ -61,6 +62,7 @@ A few pitfalls inside containers:
 - in a container that is not privileged, bwrap running as root cannot create namespaces (`Creating new namespace failed: Operation not permitted`) even when user namespaces are allowed (`unshare -Ur true` works). The sandbox detects this and adds `--unshare-user --uid 0 --gid 0` itself;
 - some containers cannot mount a fresh `/proc` in bwrap, and entering a new PID namespace with the host `/proc` makes CUDA context creation fail (error 304), so the sandbox does not create a PID namespace;
 - without network (`SANDBOX_NET=none`) torchrun cannot use `--standalone`; pin `--master-addr 127.0.0.1` instead;
+- a sandbox started as `setsid nohup sandbox.sh ... &` from a shell that exits right after (an ssh or `kubectl exec` session) can lose its command silently: a bench that waited on its torchrun was gone as soon as torchrun returned, with nothing in its log, while the orphaned torchrun had finished its case. Start background work with [`background.sh`](../goal/sandbox/background.sh), which keeps a parent that waits (the agent's own commands, started by `clawo serve`, are not affected);
 - in containers without access to performance counters `ncu` does not work; use `nsys` and `torch.profiler`.
 
 ## Run, resume, supervise ([`../goal/clawo`](../goal/clawo))
