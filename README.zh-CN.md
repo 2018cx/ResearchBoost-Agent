@@ -33,15 +33,16 @@ ResearchBoost-Agent 从研究者日常使用的训练代码入手，用 AI 加�
 
 ## 已有结果
 
-**12 个项目 · 5 个领域。** 实验设置与验证结果见分类报告。
+**13 个项目 · 5 个领域。** 实验设置与验证结果见分类报告。
 
 <details>
-<summary><strong>语言模型</strong> · 2 个项目 — NanoChat, YOCO</summary>
+<summary><strong>语言模型</strong> · 3 个项目 — NanoChat, YOCO, LLM2Vec</summary>
 
 | 项目 | 工作负载 | 加速比 |
 |---|---|---:|
-| [Faster-NanoChat](https://github.com/AI4AI-for-Anything/Faster-NanoChat) | D24 预训练（Tensorwise FP8） | **1.0744×** |
+| [Faster-NanoChat](https://github.com/AI4AI-for-Anything/Faster-NanoChat)（[@Bool1020](https://github.com/Bool1020) 贡献） | D24 预训练（Tensorwise FP8） | **1.0744×** |
 | [Faster-YOCO](https://github.com/AI4AI-for-Anything/Faster-YOCO) | YOCO-3B 预训练 | **2.12×** |
+| [Faster-LLM2Vec](https://github.com/AI4AI-for-Anything/Faster-LLM2Vec)（[@Bool1020](https://github.com/Bool1020) 贡献） | Mistral-7B · BF16 LoRA；MNTP / SimCSE（独立阶段） | **1.2900× / 1.6009×** |
 
 [实验设置与验证记录（英文） →](docs/results/llm.md)
 
@@ -161,7 +162,7 @@ Codex 用 `codex --enable default_mode_request_user_input` 启动时会弹出提
 
 | 路径 | 内容 |
 |---|---|
-| [`docs/results/`](docs/results) | 12 个项目的分类报告、测量范围与验证记录（英文） |
+| [`docs/results/`](docs/results) | 13 个项目的分类报告、测量范围与验证记录（英文） |
 | [`docs/`](docs) | 英文文档：[方法](docs/methodology.md)、[评测](docs/judge.md)、[goal 模式](docs/goal-mode.md)、[任务运行指南](docs/run-a-task.md)、[四个任务的经验](docs/lessons.md) |
 | [`goal/`](goal) | 在 claw-orchestrator 上运行 Codex 或 Claude Code `/goal` 会话的工具：建任务目录的脚本、沙箱、两种引擎的模型访问配置、启动 / 查看状态 / 发送提醒 / 恢复运行的脚本和最终评测、监控脚本，以及任务准备和监督 agent 的说明 |
 | [`numerics/`](numerics) | 各任务评测复制并固定版本的数值等价性检查组件：数据记录、逐位和分级比对、配对随机种子的训练轨迹比对、任务适配器基类及自测 |

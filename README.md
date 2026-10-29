@@ -33,15 +33,16 @@ Have a project you want accelerated? Submit it to our Wishlist.</p>
 
 ## Results
 
-**12 projects across 5 research domains.** Explore the reports for experiment settings and validation results.
+**13 projects across 5 research domains.** Explore the reports for experiment settings and validation results.
 
 <details>
-<summary><strong>LLM</strong> · 2 projects — NanoChat, YOCO</summary>
+<summary><strong>LLM</strong> · 3 projects — NanoChat, YOCO, LLM2Vec</summary>
 
 | Project | Workload | Speedup |
 |---|---|---:|
-| [Faster-NanoChat](https://github.com/AI4AI-for-Anything/Faster-NanoChat) | D24 (~1.384B) · Tensorwise FP8 training | **1.0744×** |
+| [Faster-NanoChat](https://github.com/AI4AI-for-Anything/Faster-NanoChat) by [@Bool1020](https://github.com/Bool1020) | D24 (~1.384B) · Tensorwise FP8 training | **1.0744×** |
 | [Faster-YOCO](https://github.com/AI4AI-for-Anything/Faster-YOCO) | YOCO-3B pretraining · BF16, no FP8 | **2.12×** |
+| [Faster-LLM2Vec](https://github.com/AI4AI-for-Anything/Faster-LLM2Vec) by [@Bool1020](https://github.com/Bool1020) | Mistral-7B · BF16 LoRA; MNTP / SimCSE (independent stages) | **1.2900× / 1.6009×** |
 
 [Measurement setup & validation →](docs/results/llm.md)
 
@@ -161,7 +162,7 @@ The quick start does this for you. By hand: read [AGENTS.md](AGENTS.md) and [doc
 
 | Path | Contents |
 |---|---|
-| [`docs/results/`](docs/results) | Results from 12 projects, grouped by domain, with measurement scope and validation records |
+| [`docs/results/`](docs/results) | Results from 13 projects, grouped by domain, with measurement scope and validation records |
 | [`docs/`](docs) | [Methodology](docs/methodology.md), [the judge](docs/judge.md), [goal mode](docs/goal-mode.md), [running a task](docs/run-a-task.md), [lessons from four tasks](docs/lessons.md) |
 | [`goal/`](goal) | Running one Codex or Claude Code `/goal` session on claw-orchestrator: the task scaffold, the sandbox, model access for both engines, run / status / steer / resume scripts and the final check, the watchdog, the brief for the formulating and supervising agent |
 | [`numerics/`](numerics) | The equivalence component every task judge copies and freezes: recording, bitwise and tiered comparison, paired-seed trajectories, the task adapter base class, a self-test |
