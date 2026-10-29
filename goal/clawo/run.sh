@@ -12,6 +12,8 @@
 #   MAX_REPAIRS         times a failed final check is sent back to the same thread   (default 1)
 #   TOKEN_BUDGET        tokens the goal may spend   (default: none)
 #   GOAL_TIMEOUT_MIN    wall clock for one goal pass   (default: none)
+#   THREAD              start on this existing Codex thread or Claude Code session, its history kept (to go on
+#                       after a run was cancelled or failed for an infrastructure reason)
 #   CLAWO               the clawo CLI   (default clawo on PATH); `clawo serve` is started if it is not running
 #   ASSETS, LOCAL, CODEX_ENV, CLAUDE_ENV, TOOLS, SANDBOX_MODE, SANDBOX_NET, BWRAP, RO_PATHS   passed on to sandbox.sh when set
 #
@@ -89,6 +91,7 @@ args=(goal --objective-file "$C/objective.txt" --cwd "$W" "${LAUNCH[@]}"
       --max-repairs "${MAX_REPAIRS:-1}" --json)
 # Codex is clawo's default engine; naming it keeps older clawo versions working.
 if [ "$ENGINE" = claude ]; then args+=(--engine claude); fi
+if [ -n "${THREAD:-}" ]; then args+=(--thread "$THREAD"); fi
 if [ -n "${TOKEN_BUDGET:-}" ]; then args+=(--token-budget "$TOKEN_BUDGET"); fi
 if [ -n "${GOAL_TIMEOUT_MIN:-}" ]; then args+=(--goal-timeout "$GOAL_TIMEOUT_MIN"); fi
 "$CLAWO" "${args[@]}" | tee "$C/start.json"
