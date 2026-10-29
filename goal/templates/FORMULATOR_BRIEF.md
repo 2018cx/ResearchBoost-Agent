@@ -31,7 +31,7 @@ The whole job, in order. Do the routine work yourself (installing tools, buildin
 4. **Environment and assets** into `$WORK/<task>/assets`, as scripts in `$WORK/<task>_formulation/prep/` (section 1).
 5. **The judge**: `bench/` and the adapter (section 2), the baseline and acceptance (section 3).
 6. **`GOAL.md` and `GOAL_LINE.txt`** (section 4).
-7. **The agent's home**: `ENGINE=<codex|claude> goal/setup_home.sh <task>`, the same engine as you unless the owner said otherwise; then the PONG check (section 1).
+7. **The agent's home**: `ENGINE=<codex|claude> goal/setup_home.sh <task>`, the same engine as you unless the owner said otherwise; then the PONG check (section 1). With a copied ChatGPT login, run it (and the PONG check) right before launching: the login rotates its refresh token, so a copy made hours earlier stops working once the host's own Codex refreshes, and the goal then fails within seconds.
 8. **Launch** with `goal/clawo/run.sh` (section 4), **supervise** (section 5), **report** (section 6).
 
 ## 1. Environment
@@ -71,6 +71,7 @@ Gate by gate (stop at the first failure):
    - Before any full-length formulation run (the baseline, the recordings, the trajectories), run each bench path once with the smallest plan (1 warmup step and windows of 1 step, a 1-step case, a 2-step trajectory). On a 33B model every failure a full run finds costs an hour of all GPUs.
    - Some training entry points turn every exception of a distributed rank into `os._exit` (so the launcher sees the failure at once). A timing hook that stops the run by raising then never reaches its own reporting code: write the rank's result inside the hook and leave with `os._exit(0)` there.
    - An attention kernel without a deterministic backward (cuDNN SDPA; flash-attention's default backward) is refused by strict deterministic mode, and its dQ differs between two identical calls. Route it in the adapter, in deterministic mode only, to a kernel of the same precision that has one (flash-attention 2 with `deterministic=True`), for the reference and every candidate alike; check at the recipe's shape that it is bitwise repeatable, and state the routing in `GOAL.md` (the timed kernel must compute at the precision of the judged one).
+   - Trajectory endpoints that can resolve the control arm in a few steps. For an adapter that starts at zero (a LoRA's B matrices), the size of the first update (the mean |B| over the elements above 90% or 99% of the largest, which Adam moved by nearly a full step) is proportional to the learning rate with a seed spread of 0.4% / 0.04% on a 33B model, where the loss (14%), the gradient norm (62%) and even the adapter's norm (5%: the share of gradients near Adam's epsilon depends on the samples drawn) could not resolve the control arm's 2% in 4 steps. Size the trajectory from the deterministic step time: deterministic kernels (flash-attention's deterministic backward) made a step about twice as slow as the timed one (2.9 min against 81 s).
    - Record at least one 2-step case: a 1-step case from a fresh optimizer cannot test the moment terms (Adam's first update does not depend on its betas). The recorder frees each step's recorded tensors once they are saved, so the second step fits even when the optimizer state alone takes tens of GB per GPU.
 
 ## 3. Formulation (finished and frozen before the agent starts)
