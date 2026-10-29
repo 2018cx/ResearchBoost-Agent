@@ -75,35 +75,6 @@ body:
     validations:
       required: true
 
-  - type: dropdown
-    id: verdict
-    attributes:
-      label: Judge verdict
-      description: The final `bench.py check` result.
-      options:
-        - PASS (bitwise)
-        - PASS (statistical)
-        - Other (explain below)
-    validations:
-      required: true
-
-  - type: textarea
-    id: evidence
-    attributes:
-      label: Judge evidence
-      description: Paste `check.json` (or the relevant log lines) and the `evaluator_sha256` recorded when the judge was frozen.
-      render: text
-    validations:
-      required: true
-
-  - type: textarea
-    id: trajectory
-    attributes:
-      label: Optimization trajectory
-      description: "Link to `WORK_LOG.md`, or summarize the rounds: what changed, what the judge rejected and why. A non-trivial trajectory is welcome even when the final speedup is modest."
-    validations:
-      required: true
-
   - type: textarea
     id: e2e
     attributes:
